@@ -1,0 +1,45 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build and packaging outputs
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test coverage
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# macOS
+.DS_Store
+._*
+
+# IDE and editor temporary files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Notebook checkpoints
+.ipynb_checkpoints/
