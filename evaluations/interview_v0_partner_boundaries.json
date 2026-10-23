@@ -1,0 +1,703 @@
+{
+  "benchmark": "interview-v0-8-cases-v2",
+  "timestamp_utc": "2026-10-23T01:05:40.827982+00:00",
+  "prompt_sha256": "1c6e3c49c72ef2d8c16167307f455f17c11bd23ad3f8254223d0db721f7192a9",
+  "scoring": "字段/列表顺序精确比较；禁用推断与收束为透明词汇启发式，无额外 LLM judge",
+  "results": [
+    {
+      "case_id": "case_1_relaxation",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow"
+        },
+        "confirmed_topics": [],
+        "deterministic_ready": null
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "purpose": "relaxation",
+            "preferred_pace": "slow"
+          },
+          "confirmed_topics": [
+            "purpose",
+            "preferred_pace"
+          ],
+          "missing_topics": [
+            "activity_preferences",
+            "required_activities",
+            "excluded_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "assistant_message": "听起来这次更想把节奏放慢、好好休息一下，那我就不安排紧凑的赶场了。这趟东京之行有没有什么是你们特别想去、不想错过的？"
+        },
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow",
+          "activity_preferences": [],
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "confirmed",
+            "preferred_pace": "confirmed",
+            "activity_preferences": "unknown",
+            "required_activities": "unknown",
+            "excluded_activities": "unknown",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "activity_preferences",
+            "required_activities",
+            "excluded_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "phase": "interviewing"
+        },
+        "deterministic_ready": false
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": null,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3221,
+        "output_tokens": 113,
+        "total_tokens": 3334,
+        "latency_ms": 1713.2567088119686,
+        "cached_input_tokens": 384,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "case_2_required_excluded",
+      "status": "FAIL",
+      "failures": [
+        "excluded_activities: expected=['Disneyland'], actual=['theme parks']"
+      ],
+      "expected": {
+        "context": {
+          "required_activities": [
+            "cherry blossom viewing"
+          ],
+          "excluded_activities": [
+            "Disneyland"
+          ]
+        },
+        "confirmed_topics": [
+          "required_activities",
+          "excluded_activities"
+        ],
+        "deterministic_ready": null
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "required_activities": [
+              "cherry blossom viewing"
+            ],
+            "excluded_activities": [
+              "theme parks"
+            ]
+          },
+          "confirmed_topics": [
+            "required_activities",
+            "excluded_activities"
+          ],
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "activity_preferences",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "assistant_message": "明白，樱花是这次一定要安排的部分，迪士尼这类主题乐园就不去了。这次三天在东京，你们更想以什么样的节奏来玩——是慢慢逛、留些闲散时间，还是行程排得紧凑一些？"
+        },
+        "context": {
+          "purpose": null,
+          "preferred_pace": null,
+          "activity_preferences": [],
+          "required_activities": [
+            "cherry blossom viewing"
+          ],
+          "excluded_activities": [
+            "theme parks"
+          ]
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "unknown",
+            "preferred_pace": "unknown",
+            "activity_preferences": "unknown",
+            "required_activities": "confirmed",
+            "excluded_activities": "confirmed",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "activity_preferences",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "phase": "interviewing"
+        },
+        "deterministic_ready": false
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": null,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3214,
+        "output_tokens": 129,
+        "total_tokens": 3343,
+        "latency_ms": 1572.8097083047032,
+        "cached_input_tokens": 2560,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "case_3_explicit_none",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "confirmed_topics": [
+          "required_activities",
+          "excluded_activities"
+        ],
+        "deterministic_ready": null
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "required_activities": [],
+            "excluded_activities": []
+          },
+          "confirmed_topics": [
+            "required_activities",
+            "excluded_activities"
+          ],
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "activity_preferences",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "assistant_message": "明白，这次没有必须打卡的地方，也没有要刻意避开的项目，行程可以灵活安排。那这趟东京之行你们更希望是什么感觉，比如想放松一些、逛得充实一点，还是随性走走就好？"
+        },
+        "context": {
+          "purpose": null,
+          "preferred_pace": null,
+          "activity_preferences": [],
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "unknown",
+            "preferred_pace": "unknown",
+            "activity_preferences": "unknown",
+            "required_activities": "confirmed",
+            "excluded_activities": "confirmed",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "activity_preferences",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "phase": "interviewing"
+        },
+        "deterministic_ready": false
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": null,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3214,
+        "output_tokens": 121,
+        "total_tokens": 3335,
+        "latency_ms": 1432.0463328622282,
+        "cached_input_tokens": 2560,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "case_4_replace",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "activity_preferences": [
+            "art exhibitions",
+            "architecture"
+          ]
+        },
+        "confirmed_topics": [],
+        "deterministic_ready": null
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "activity_preferences": [
+              "art exhibitions",
+              "architecture"
+            ],
+            "excluded_activities": [
+              "shopping",
+              "cafes"
+            ]
+          },
+          "confirmed_topics": [
+            "activity_preferences",
+            "excluded_activities"
+          ],
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "required_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "assistant_message": "好的，那这次就不安排逛街和咖啡馆，重点放在艺术展和建筑上。想再确认一下，这趟东京之行更偏向哪种感觉——以看展和建筑为主线，还是有其他主要目的？"
+        },
+        "context": {
+          "purpose": null,
+          "preferred_pace": null,
+          "activity_preferences": [
+            "art exhibitions",
+            "architecture"
+          ],
+          "required_activities": [],
+          "excluded_activities": [
+            "shopping",
+            "cafes"
+          ]
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "unknown",
+            "preferred_pace": "unknown",
+            "activity_preferences": "confirmed",
+            "required_activities": "unknown",
+            "excluded_activities": "confirmed",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "required_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "phase": "interviewing"
+        },
+        "deterministic_ready": false
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": null,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3236,
+        "output_tokens": 132,
+        "total_tokens": 3368,
+        "latency_ms": 1839.3103750422597,
+        "cached_input_tokens": 2304,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "case_5_no_stereotypes",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "preferred_pace": null,
+          "activity_preferences": [],
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "confirmed_topics": [],
+        "deterministic_ready": null
+      },
+      "actual": {
+        "turn": {
+          "context_update": {},
+          "confirmed_topics": [],
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "activity_preferences",
+            "required_activities",
+            "excluded_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "assistant_message": "第一次一起去东京，挺好的。既然想正常玩，那这趟有没有什么是你们特别想一起做的，比如看展、逛历史街区，或者随便走走逛逛"
+        },
+        "context": {
+          "purpose": null,
+          "preferred_pace": null,
+          "activity_preferences": [],
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "unknown",
+            "preferred_pace": "unknown",
+            "activity_preferences": "unknown",
+            "required_activities": "unknown",
+            "excluded_activities": "unknown",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "purpose",
+            "preferred_pace",
+            "activity_preferences",
+            "required_activities",
+            "excluded_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "phase": "interviewing"
+        },
+        "deterministic_ready": false
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": null,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3214,
+        "output_tokens": 96,
+        "total_tokens": 3310,
+        "latency_ms": 1406.6203329712152,
+        "cached_input_tokens": 2560,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "case_6_closure",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow",
+          "required_activities": [
+            "cherry blossom viewing"
+          ],
+          "excluded_activities": []
+        },
+        "confirmed_topics": [
+          "excluded_activities"
+        ],
+        "deterministic_ready": true
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "excluded_activities": []
+          },
+          "confirmed_topics": [
+            "excluded_activities"
+          ],
+          "missing_topics": [],
+          "ready_to_plan": true,
+          "assistant_message": "好的，没有特别要避开的活动，我明白了。这样你们这趟东京之行想放松、节奏慢一些，并以赏樱为重点，相关信息就齐了。接下来可以进入下一步安排了。"
+        },
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow",
+          "activity_preferences": [],
+          "required_activities": [
+            "cherry blossom viewing"
+          ],
+          "excluded_activities": []
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "confirmed",
+            "preferred_pace": "confirmed",
+            "activity_preferences": "confirmed",
+            "required_activities": "confirmed",
+            "excluded_activities": "confirmed",
+            "special_requirements": "confirmed"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [],
+          "ready_to_plan": true,
+          "phase": "ready_to_plan"
+        },
+        "deterministic_ready": true
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": true,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3225,
+        "output_tokens": 84,
+        "total_tokens": 3309,
+        "latency_ms": 1532.5447502546012,
+        "cached_input_tokens": 2304,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "dialogue_whole_sentence",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow"
+        },
+        "confirmed_topics": [
+          "purpose",
+          "preferred_pace"
+        ],
+        "deterministic_ready": null
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "purpose": "relaxation",
+            "preferred_pace": "slow"
+          },
+          "confirmed_topics": [
+            "purpose",
+            "preferred_pace"
+          ],
+          "missing_topics": [
+            "activity_preferences",
+            "required_activities",
+            "excluded_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "assistant_message": "听起来这趟东京行更想像真正的休息，不用赶场，慢慢来就好。那这几天里，有没有什么是一定想安排进去的，或者有什么是你完全不想碰的？"
+        },
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow",
+          "activity_preferences": [],
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "confirmed",
+            "preferred_pace": "confirmed",
+            "activity_preferences": "unknown",
+            "required_activities": "unknown",
+            "excluded_activities": "unknown",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "activity_preferences",
+            "required_activities",
+            "excluded_activities",
+            "special_requirements"
+          ],
+          "ready_to_plan": false,
+          "phase": "interviewing"
+        },
+        "deterministic_ready": false
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": null,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3212,
+        "output_tokens": 116,
+        "total_tokens": 3328,
+        "latency_ms": 1576.5436668880284,
+        "cached_input_tokens": 2560,
+        "reasoning_tokens": 0
+      }
+    },
+    {
+      "case_id": "dialogue_no_reconfirmation",
+      "status": "PASS",
+      "failures": [],
+      "expected": {
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow",
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "confirmed_topics": [
+          "required_activities",
+          "excluded_activities"
+        ],
+        "deterministic_ready": true
+      },
+      "actual": {
+        "turn": {
+          "context_update": {
+            "required_activities": [],
+            "excluded_activities": []
+          },
+          "confirmed_topics": [
+            "purpose",
+            "preferred_pace",
+            "required_activities",
+            "excluded_activities"
+          ],
+          "missing_topics": [
+            "activity_preferences",
+            "special_requirements"
+          ],
+          "ready_to_plan": true,
+          "assistant_message": "好的，目的和慢节奏保持不变，没有必须安排或一定要避开的活动，这样规划时就有足够的弹性。我理解得差不多了，接下来可以进入下一步安排。"
+        },
+        "context": {
+          "purpose": "relaxation",
+          "preferred_pace": "slow",
+          "activity_preferences": [],
+          "required_activities": [],
+          "excluded_activities": []
+        },
+        "state": {
+          "trip_id": "trip_tokyo_alex_bella",
+          "topics": {
+            "purpose": "confirmed",
+            "preferred_pace": "confirmed",
+            "activity_preferences": "unknown",
+            "required_activities": "confirmed",
+            "excluded_activities": "confirmed",
+            "special_requirements": "unknown"
+          },
+          "trip_setup_complete": true,
+          "missing_topics": [
+            "activity_preferences",
+            "special_requirements"
+          ],
+          "ready_to_plan": true,
+          "phase": "ready_to_plan"
+        },
+        "deterministic_ready": true
+      },
+      "forbidden_inference": {
+        "status": "PASS",
+        "hits": [],
+        "method": "词汇启发式；不是语义裁判，否定/澄清可能误报"
+      },
+      "closure_passed": true,
+      "dialogue_strategy": {
+        "status": "PASS",
+        "hits": [],
+        "method": "重复提问/checklist 词汇启发式，不是自然性完整评分"
+      },
+      "metrics": {
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "input_tokens": 3224,
+        "output_tokens": 108,
+        "total_tokens": 3332,
+        "latency_ms": 1574.9301249161363,
+        "cached_input_tokens": 2304,
+        "reasoning_tokens": 0
+      }
+    }
+  ],
+  "passed": 7,
+  "total": 8,
+  "pass_rate": 0.875
+}

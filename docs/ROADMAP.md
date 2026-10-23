@@ -1,5 +1,9 @@
 # 人生旅迹｜开发路线图 Roadmap
 
+Last updated: 2026-10-23
+
+**阶段快照**：Owner 已决定 V0 本地功能基本结束，进入收尾。Schema、创建流程、Context Builder、真实访谈、SQLite/FastAPI/Web、手动结构化行程生成已实现。行程对照实验与完整质量验收尚未完成，作为后续验证缺口保留；V1–V6 仍是计划，不是自动实施授权。
+
 ## 1. 总体开发原则
 
 “人生旅迹”采用渐进式开发。
@@ -38,7 +42,7 @@ V0 个性化推荐验证
 
 这个阶段不追求完整产品。
 
-重点是证明“人生旅迹”的核心价值成立。
+原研究目标是验证“人生旅迹”的核心价值。当前已完成工程闭环；尚未以受控行程对照证明该假设。
 
 ---
 
@@ -77,13 +81,7 @@ V0 个性化推荐验证
 
 输出必须是结构化 itinerary，而不是一大段自然语言。
 
-初步可能包括：
-
-- Day
-- Activity
-- Place
-- Time period
-- Recommendation reason
+当前已实现：Itinerary(trip_id/summary/days)，Day(date/theme/activities)，Activity(time_period/title/description/rationale)。没有独立 Place/POI 模型或实时地点来源。
 
 ---
 
@@ -138,15 +136,15 @@ V0 个性化推荐验证
 - Long-term Memory
 - Vector Database
 - Multi-Agent
-- 完整前端
+- 生产级前端（本地 React 视觉与核心交互已由 Owner 授权实现）
 - 自动预订
 - 复杂 Agent Framework
 
 ---
 
-### V0 完成标准
+### V0 研究验证标准（尚未完成，不阻止本次工程收尾）
 
-V0 验收需要可重复的证据，不以单个示例或主观印象判定完成。
+以下保留原研究验收要求。Owner 本次决定的是 V0 功能收尾，不代表这些标准已满足；后续是否补齐或调整标准需明确记录，不能把单个示例当作质量结论。
 
 #### 固定案例与对比方法
 
@@ -595,17 +593,11 @@ Memory 不等于：
 
 #### API Layer
 
-使用 FastAPI 等方式提供统一接口。
+V0 已有本地 FastAPI；未来考虑生产化接口、权限、可靠性和部署。
 
 #### Persistence
 
-存储：
-
-- Person
-- Relationship
-- Trip
-- Memory
-- Itinerary
+V0 已通过 SQLite 保存 Person、Relationship、Trip/TripContext、InterviewState 与本机主体绑定。后续再设计 Memory、Itinerary 和聊天历史持久化及生产数据库演进，不把现有持久化写成尚未实现。
 
 #### Deployment
 
@@ -638,24 +630,16 @@ Multi-Agent 是可能的技术选择，而不是项目目标。
 
 ---
 
-## 10. 当前优先级
+## 10. V0 收尾与下一步候选
 
-当前项目处于：
+当前为 V0 本地功能收尾，代码与能力快照见 CURRENT_STATUS。后续候选按价值排序，需 Owner 明确任务后实施：
 
-> V0 — Personalized Travel Recommendation Validation
+1. 明确活动标签标准化约定与抽取范围，针对已知 case_2 失败回归。
+2. 建立行程个性化、推荐理由和明确排除项的评估；设计普通 Prompt 对照与重复运行。
+3. 评估当前用户测试后是否需要行程持久化、修改等体验；这些尚未实现。
+4. 若决定推进 V1，再选择最小真实信息来源，不同时引入地图、Memory、多 Agent 或大型框架。
 
-当前第一阶段顺序：
-
-1. 明确 Person 数据结构
-2. 明确 Relationship 数据结构
-3. 明确 Trip / Trip Context
-4. 明确 Itinerary Output
-5. 构造第一批固定测试案例，并定义预期行为与基础评分规则
-6. 完成第一版 personalized itinerary generation
-7. 运行普通 Prompt 基线与 personalized context 的重复对比
-8. 根据基础 Evaluation 结果检查 V0 验收标准并改进
-
-在 V0 核心价值验证之前，不提前开发后续复杂系统。
+单元测试与真实访谈 benchmark 已有，不能把“有评估”写成“行程质量已证实”。本轮不自动推进后续阶段。
 
 ---
 

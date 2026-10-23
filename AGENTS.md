@@ -60,7 +60,7 @@ Person Data + Relationship Data + Trip Participants + Trip Context
 
 ## 4. 人物、关系与旅行的语义边界
 
-- **Person 是独立实体**：不采用主用户下永久附属 Companion 的模型。任何人都可独自旅行或与不同人旅行。
+- **Person 是独立实体**：任何人都可独自旅行或与不同人旅行。Web 本机入口通过固定主体指针区分“我的资料”和“同行人”，不把其他 Person 变成永久附属对象；不得把保存本人资料变成新增人物。
 - **Relationship 是长期关系**：连接 Person，例如伴侣、朋友、父母等；关系存在不代表每次同行。
 - **Trip Participants 属于 Trip**：某次旅行实际参加谁，由该次旅行选择，不是 Person 的固定属性。
 - **个人偏好与关系偏好分离**：“我喜欢什么”不等于“我们一起时喜欢什么”。不得自动相互覆盖。V0 仅保留必要关系信息，不提前设计复杂关系记忆。
@@ -76,7 +76,7 @@ Person Data + Relationship Data + Trip Participants + Trip Context
 
 ## 6. Schema、Context 与 Prompt
 
-核心输入输出采用明确 Schema。V0 已确认使用 Pydantic，预期模型包括 Person、Relationship、Trip、TripContext、Itinerary、ItineraryDay 和 ItineraryActivity；这不表示代码已存在。
+核心输入输出采用明确 Pydantic Schema。Person、Relationship、Trip、TripContext、Itinerary、ItineraryDay 和 ItineraryActivity 已实现；字段与最新能力以代码和 ARCHITECTURE 为准，不把后续设想写成当前功能。
 
 字段仅覆盖当前需求。优先清晰类型、简单嵌套、验证和序列化；避免深层继承、动态 Schema、不必要泛型与预先抽象。新增字段应来自产品需求、评估发现或真实数据问题。
 
@@ -100,7 +100,7 @@ Context Builder 只选择当前任务相关的信息：参与者的 Profile、�
 
 Provider 调用集中在独立 LLM Client 与配置中，业务逻辑不散落具体 SDK 调用。保持适度边界以支持后续模型比较，不提前实现通用 Provider 平台。
 
-Provider 和具体模型尚未锁定，不擅自绑定。选择依据包括质量、结构化输出可靠性、成本、延迟和评估结果，不默认使用最强模型。
+当前 Provider 实现与默认模型以代码及 DECISIONS 为准；已采用 DeepSeek，业务层保留独立 Protocol。未经任务授权不自行更换 Provider/模型。选择依据包括质量、结构化输出可靠性、成本、延迟和评估结果，不默认使用最强模型。
 
 从首次真实 API 调用开始，尽量记录 model、input/output/total tokens、latency 和错误。Provider 提供费用时可记录；自行估算须标注估算及依据，不编造缺失指标。
 
@@ -122,6 +122,8 @@ Provider 和具体模型尚未锁定，不擅自绑定。选择依据包括质�
 
 ## 10. 测试与 Evaluation
 
+每个测试函数都必须使用中文注释或 docstring，写明测试输入（Input）、预期输出或预期异常（Expected Output）、测试内容和测试目的。参数化测试应说明各组输入及其预期行为，可在函数说明中概括参数类别，并为不明显的边界案例补充注释；不要求为每次参数展开重复相同说明。
+
 普通 Python 逻辑使用单元测试，例如 Schema、关系查找、参与者选择、Context Builder 和输出验证。外部 API 使用 mock、fixture 或 stub，使单元测试不依赖真实网络。
 
 LLM 质量使用固定 Persona、关系、旅行场景和约束做 Evaluation，不用整段文本完全相等判断质量。V0 关注个性化、相关性、偏好一致性、关系与情境感知、避免盲从热门和结构化输出可靠性；后续加入事实准确性、可行性、工具准确性、成本和延迟。
@@ -133,6 +135,8 @@ LLM 质量使用固定 Persona、关系、旅行场景和约束做 Evaluation，
 ## 11. 代码、依赖与安全
 
 优先可读性、正确性、显式逻辑、可测试性和可维护性。使用清晰命名、类型提示、小函数、明确输入输出和必要文档；避免巨大函数、隐藏全局状态、魔法数字、炫技写法和无必要设计模式。
+
+代码内部的所有注释统一使用中文，包括行内注释、块注释和文档字符串（docstring）。必要的技术术语、标识符和代码示例可保留原文。
 
 添加依赖前检查标准库和已有依赖是否足够、新依赖是否真正降低复杂度，以及 Owner 能否理解原因。重要依赖决策记录到 DECISIONS。
 

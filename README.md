@@ -1,152 +1,104 @@
 # 人生旅迹
 
-> 一个长期理解“你是谁、和谁出发、为什么出发”的个性化 AI Travel Agent。
+一个结合“我是谁、和谁出发、这次想要什么”的个性化 AI 旅行原型。
 
-**人生旅迹**是一个正在开发中的个性化旅行 Agent 项目，探索如何结合个人偏好、人与人的关系，以及每次旅行的具体情境，生成更适合当前参与者的行程。
+**当前状态：V0 本地功能收尾（2026-10-23）。** 已可在 Web 完成人物资料、同行关系、旅行创建、真实 AI 访谈和结构化行程生成。推荐质量仍有已知缺口；本次收尾不代表已证明个性化显著优于普通攻略，也不是生产发布。
 
-它希望回答：
+## 已实现的体验
 
-> 对于这一次旅行中的这些人来说，什么才真正值得去？
+1. **我的资料**：固定本机主体，保存更新同一个 Person；姓名、可选性别/MBTI、兴趣、不喜欢、食物偏好和旅行节奏。
+2. **同行人**：新增或编辑独立人物，并单独保存与本人的关系、共同旅行偏好及共同节奏。
+3. **新建旅行**：目的地、起止日期、预算与参与者，保存到本地 SQLite。
+4. **行程访谈**：围绕本次需求自然交谈；一条用户消息对应一次模型调用、一条完整 AI 回复，逐步更新本次情境和确认状态。
+5. **开始规划**：达到系统最低门槛后手动点击，展示按日组织的活动和“为什么适合你”。
 
-**当前状态：V0 文档与设计准备阶段。尚未实现核心功能代码、可运行 Demo 或端到端旅行规划链路。** 下文描述产品目标与已批准设计，不代表已上线能力。
+人物/关系/旅行/访谈状态会保存；**聊天记录和生成行程仅在当前页面内存中，刷新后不恢复**。V0 行程基于模型知识，不保证地点、营业时间、交通、价格或季节性信息实时准确，出行前需要核实。
 
-## 为什么做这个项目？
+## 本地启动
 
-热门榜单、景点评分和“必去清单”能提供参考，但不足以描述一个人真正想要的旅行。
+需要 Python 3.11+ 与可运行当前 Vite 的 Node.js/npm。项目目录下首次准备 Python 环境：
 
-同一个人去东京，独自出发、与伴侣同行或带父母旅行，即使目的地和天数相同，也可能需要不同的安排。差异应来自具体参与者的偏好、需求和本次情境，而不是对关系标签的刻板推断。
-
-人生旅迹希望为这些具体的人提供有依据、可解释的推荐。同时，本项目也是 Owner 学习 AI / Agent Engineering、积累工程经验与求职展示的个人项目，核心代码和决策必须能够被理解、修改和解释。
-
-## 核心理念
-
-### Person First：每个人都是独立实体
-
-Person、Relationship 与 Trip Participation 是三个不同的概念：
-
-- **Person**：独立的人及其个人偏好。
-- **Relationship**：人与人之间的长期连接。
-- **Trip Participants**：某次旅行实际参加的人。
-
-系统不把一个人永久定义为另一个人的附属 Companion。一对夫妻可以共同旅行，也可以分别独自出发或与朋友同行。关系不等于同行。
-
-### Relationship Awareness：区分“我喜欢”与“我们喜欢”
-
-个人偏好不一定等于与特定的人一起旅行时的偏好。例如，一个人独自旅行时喜欢高强度探索，但与某位伴侣同行时更喜欢慢节奏。
-
-这类差异需要来自明确提供的信息或反馈。`parent` 不自动意味着体力较弱，`partner` 也不自动意味着喜欢浪漫安排。
-
-### Context Awareness：长期偏好与本次要求分离
-
-一个长期喜欢城市探索的人，这次可能只想休息。系统应同时考虑两者，不能将单次旅行需求自动变成长期标签。
-
-### Popularity ≠ Personal Relevance：热门不等于适合
-
-知名度、评分和热度是参考信号，不能替代个人相关性。推荐可以包含经典景点，也可以跳过不匹配的热门地点；判断依据应是当前参与者及旅行情境，并能解释原因。
-
-### Long-term Understanding：允许理解逐渐深化，也允许人改变
-
-长期愿景是从“喜欢咖啡馆”逐渐理解到更具体的偏好，例如安静、有设计感的独立咖啡馆。系统也应允许偏好随生活阶段和旅行经验变化。
-
-明确事实、明确偏好、具体反馈、系统推断与本次旅行情境需要分开。推断不能被当作用户已确认的事实，错误信息应能被纠正。**长期 Memory 尚未实现，不属于当前 V0 核心范围。**
-
-## V0：验证个性化推荐
-
-当前阶段：**V0 — Personalized Travel Recommendation Validation**。
-
-核心假设是：结构化的 Person、Relationship、Trip Participants 和 Trip Context，能够让模型生成比普通旅游攻略更符合当前参与者和旅行情境的结果。
-
-已批准、尚待实现的流程：
-
-```text
-Person Data + Relationship Data + Trip Participants + Trip Context
-    → Context Builder
-    → Prompt Builder
-    → LLM Client
-    → Structured Output / Itinerary
-    → Basic Validation
-    → Basic Evaluation
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -e ".[dev]"
 ```
 
-V0 可以使用人工构造的数据。重点是输入结构、相关上下文选择、结构化行程、推荐理由与基础评估。
+终端 A（项目根目录）启动后端：
 
-当前已有产品定义、路线图、V0 设计、技术决策和协作规则文档；Schema、Context Builder、Prompt Builder、LLM Client、行程生成、测试和 Evaluation Cases 均尚未实现。最新进度以 [CURRENT_STATUS.md](docs/CURRENT_STATUS.md) 为准。
-
-后续 V0 实现将围绕核心 Pydantic Schema、固定测试数据与评估案例，以及上述主流程逐步开展。
-
-V0 暂不接入真实旅行 API、正式数据库、向量数据库、长期 Memory、复杂 Agent Framework、Multi-Agent、完整前端或自动预订。模拟或未经验证的现实信息需要明确标识；结构化输出本身不证明行程现实可执行。
-
-## V0 Evaluation
-
-Evaluation 从 V0 开始，贯穿后续阶段。目前已有评估方向与验收方法文档，尚无实际评估结果。
-
-计划固定 Persona、Relationship、参与者、本次情境与预期行为，对比：
-
-```text
-普通 Prompt Baseline（目的地与本次旅行要求）
-    vs
-Personalized Context（加入相关人物与关系信息）
+```bash
+PYTHONPATH=src .venv/bin/python -m uvicorn life_journey.api:app --host 127.0.0.1 --port 8000
 ```
 
-比较时保持模型、生成参数、输出 Schema 和共同要求一致，并通过单因素变化案例与重复运行，检查：
+终端 B 启动前端：
 
-- 个性化与推荐相关性。
-- 与已提供偏好的一致性。
-- 对参与者、关系信息及本次情境的正确使用。
-- 推荐理由是否有依据，是否盲从热门。
-- 结构化输出可靠性及明确限制的遵守情况。
+```bash
+cd frontend
+npm ci
+npm run dev
+```
 
-“两个结果不一样”不能单独证明个性化成功，也不能凭单个优秀示例断定整体提升。评分规则、重复次数和通过阈值须在验收前确定；具体方法见 [ROADMAP.md](docs/ROADMAP.md)。
+打开 [本地前端](http://127.0.0.1:5173/)。开发代理把 `/api` 转发到 8000，后端仅允许本地 5173 的 CORS。API 文档为 [本地 Swagger](http://127.0.0.1:8000/docs)。这些是本地开发方式，尚无部署配置。
 
-## 开发路线
+人物/旅行保存不需要模型 Key；真实访谈、规划需要在**启动后端的终端**配置 `DEEPSEEK_API_KEY`。可选 `DEEPSEEK_MODEL`，当前代码默认 `deepseek-flash`。程序不自动加载 `.env`，`.env.example` 仅作配置说明，不把 Key 放进前端或提交 Git。
 
-以下均为阶段规划，不代表已实现能力：
+默认数据库为 `.local/life_journey.sqlite3`，可用 `LIFE_JOURNEY_DB` 指定其他路径；数据库及辅助文件已忽略。空库先创建我的资料；已有多个人物但未绑定主体时，首次选择自己的资料并保存。之后主体固定，不因刷新、重试或添加伙伴改变。没有登录或用户隔离。
 
-| 阶段 | 目标 |
+## 数据流和边界
+
+```text
+React → FastAPI → application/domain → SQLite
+                            ↓
+Trip + relevant Persons/Relationships → TravelContext
+                            ↓
+Interview Prompt → LLM → validated update → TripContext + InterviewState
+                            ↓
+deterministic ready → 用户点击 → Planning Prompt → LLM → Itinerary → Web
+```
+
+- Person、Relationship、Trip participants 分开；关系不自动增加参与者，个人偏好和共同偏好不合并。
+- Create 输入不带自身 ID；应用生成带 `person_` / `relationship_` / `trip_` 前缀的 UUID4。
+- Trip Setup 为目的地、日期、预算和参与者；TripContext 是本次访谈形成的结构化理解，不回写长期 Profile。
+- 不根据性别、MBTI 或关系标签认定兴趣/体力；伴侣可被适度征询约会氛围，只有明确接受才记录。
+- Popularity ≠ Personal Relevance；推荐理由应来自明确偏好与本次情境。
+- LLM ready 只是建议；系统重算 readiness，未通过时 Planning API 返回 409 且不调用模型。
+
+## 验证与已知限制
+
+最新功能验证：**692 项 pytest 通过**，1 项既有第三方弃用提示；前端 TypeScript/Vite build 通过。普通测试离线，不调用 DeepSeek：
+
+```bash
+.venv/bin/python -m pytest -q
+.venv/bin/python -m pip check
+cd frontend
+npm run build
+```
+
+真实访谈 benchmark 与 pytest 分开，运行会产生模型调用费用：
+
+```bash
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.interview --include-dialogue --output evaluations/interview_v0_latest.json
+```
+
+最新已保存报告为 `evaluations/interview_v0_gender_context.json`，7/8（87.5%）；失败例仍有中英文活动标签不一致，历史运行还出现过排除范围扩大。评分含词汇启发式，不能证明不存在语义推断。真实规划曾以虚构输入通过 3 天/9 活动的结构与日期校验，不代表推荐事实或质量已充分验证。详见 [Evaluation](evaluations/README.md)。
+
+未实现：实时搜索/地图/价格、工具调用、可执行性和费用验证、行程质量对比评分、行程持久化/修改、聊天历史持久化、登录、部署、长期 Memory、Multi-Agent。当前没有删除/主体换绑/通用 Trip 修改 UI 或接口。常规 Person/Relationship 更新是完整替换，不是 PATCH；预算尚未明确人均/全组等口径。
+
+## 项目结构与文档
+
+| 位置 | 职责 |
 | --- | --- |
-| V0 | Personalized Recommendation Validation：验证个性化推荐 |
-| V1 | Real-world Travel Information：接入真实旅行信息 |
-| V2 | Tool-Using Workflow：使用工具的工作流 |
-| V3 | Constraint Validation & Local Replanning：约束验证与局部重规划 |
-| V4 | Long-term Memory：长期记忆 |
-| V5 | Evaluation Expansion & Model Optimization：扩展已有评估与模型优化 |
-| V6 | Production-oriented Agent Engineering：面向持续运行的工程能力 |
+| `src/life_journey/schemas/` | 用户输入、内部领域、访谈、规划契约 |
+| `src/life_journey/application/` | 创建、上下文选择、访谈应用与编排、规划 |
+| `src/life_journey/llm/` | Provider-independent Protocol 与 DeepSeek transport |
+| `src/life_journey/api.py` / `storage.py` | 本地 FastAPI 与 SQLite |
+| `frontend/` | React/Vite/TypeScript，本地照片与暗色视觉 |
+| `tests/` / `sample_data.py` | 离线测试与固定虚构输入 |
+| `evaluations/` | 手动真实访谈 benchmark 与报告 |
 
-基础评估从 V0 开始，各阶段为新增能力补充评估。Multi-Agent 不是必经阶段，只有在普通函数、结构化工作流或 Single Agent 无法合理解决真实问题，且能证明收益时再考虑。
+[产品](docs/PRODUCT.md) · [当前状态](docs/CURRENT_STATUS.md) · [架构/API](docs/ARCHITECTURE.md) · [路线图](docs/ROADMAP.md) · [决策](docs/DECISIONS.md) · [协作规则](AGENTS.md) · [前端](frontend/README.md)
 
-## 工程原则与技术选择
+开发 CLI：`PYTHONPATH=src .venv/bin/python -m life_journey.cli --debug`。使用虚构 Alex+Bella 场景，内存多轮访谈，`/quit` 或 `/exit` 退出；系统就绪后结束，CLI 不生成行程、不连接正式人物库。
 
-- **Simple First**：复杂度必须解决当前真实问题。
-- **Structured First**：核心输入输出采用明确 Schema。
-- **Deterministic Where Possible**：验证、查找、计算和规则检查优先由 Python 处理。
-- **LLM for Semantic Decisions**：模型负责语义理解、偏好权衡、规划与推荐理由。
-- **Measure Before Optimize**：从真实 API 调用开始尽量记录模型、Token 与延迟；成本可获得或可估算时注明依据，再根据质量与成本数据优化。
+## English summary
 
-V0 已确认采用 Python、Pydantic、独立 LLM Client 与结构化输出，并分别使用单元测试验证程序逻辑、Evaluation 评估模型行为。这些是设计选择，尚未形成可运行实现。
-
-具体 LLM Provider 和模型尚未选定。数据库、向量数据库、Agent Framework、前端与部署平台留到真实需求出现后再评估；V0 优先使用原生 Python 与人工数据。
-
-## 项目文档
-
-| 文档 | 内容 |
-| --- | --- |
-| [PRODUCT.md](docs/PRODUCT.md) | 产品定位、核心价值和用户体验 |
-| [ROADMAP.md](docs/ROADMAP.md) | 阶段路线与 V0 验收标准 |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Current Architecture 与 Approved V0 Design |
-| [DECISIONS.md](docs/DECISIONS.md) | 已确认决策、原因与取舍 |
-| [CURRENT_STATUS.md](docs/CURRENT_STATUS.md) | 当前真实开发状态 |
-| [AGENTS.md](AGENTS.md) | Coding Agent 的协作规则 |
-
-当前尚无安装、运行或测试命令；相关说明将在可运行实现落地后补充。
-
-## English Summary
-
-**人生旅迹 (Life Travel Trace)** is a personalized AI travel agent project under development. Its long-term goal is to understand who people are, whom they travel with, and why each trip happens.
-
-The project asks: **What is actually worth doing for these specific people on this specific trip?**
-
-The approved V0 design combines person profiles, relationships, trip participants, and trip context to generate a structured itinerary. People are independent entities; relationships do not imply participation or preferences. Long-term preferences, temporary requirements, and inferred information remain distinct. Popularity is a signal, not a substitute for personal relevance.
-
-The project is currently in **V0 — Personalized Travel Recommendation Validation**, at the documentation and design stage. No core implementation, runnable demo, or end-to-end travel agent exists yet. Real-world travel tools and long-term memory are future work.
-
-V0 will compare personalized context against a generic travel-planning baseline using fixed cases, controlled comparisons, repeated runs, and explicit evaluation criteria. Evaluation begins in V0; complexity is introduced only when a real problem justifies it.
+Life Journey is a locally runnable V0 personalized travel prototype: persistent profiles, relationships and trips, a real AI interview, and user-triggered structured itinerary generation. React talks to FastAPI, SQLite and provider-independent Python application logic. DeepSeek is the current provider. V0 feature implementation is closing; comparative itinerary quality validation is still incomplete. No real-time travel tools, authentication, deployment, conversation-history storage or itinerary persistence are implemented.
