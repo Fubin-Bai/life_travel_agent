@@ -299,17 +299,34 @@ def test_fake_client_works_with_public_protocol(prompt):
 
 
 
-def test_planning_uses_same_transport_with_itinerary_contract(make_client):
+@pytest.mark.parametrize("place_id", [None, "p1"])
+def test_planning_uses_same_transport_with_itinerary_contract(make_client, place_id):
     """Input：假的 Responses 行程 JSON；Expected Output：一次请求、Itinerary 契约、日期还原和指标；验证无真实网络的 Provider 适配。"""
     from life_journey.schemas.itinerary import Itinerary
     from life_journey.schemas.planning import PlanningPrompt
     data={"trip_id":"trip_test","summary":"慢节奏","days":[{"date":"2026-11-10","theme":"看展","activities":[{"time_period":"afternoon","title":"展览","description":"待核实信息","rationale":"符合明确兴趣"}]}]}
+    if place_id is not None:
+        data["days"][0]["activities"][0]["place_id"] = place_id
     body=response_body()
     body["output"][0]["content"][0]["text"]=json.dumps(data)
     client,calls=make_client(body=body)
     prompt=PlanningPrompt(system_prompt="规划测试",user_prompt="{}",output_schema=Itinerary.model_json_schema(mode="validation"))
     result=client.generate_itinerary(prompt)
-    assert result.output.model_dump(mode="json") == data
+    assert result.output.model_dump(mode="json", exclude_none=True) == data
     assert len(calls) == 1
     assert json.loads(calls[0].content)["text"]["format"]["name"] == "Itinerary"
     assert result.total_tokens == 110
+
+
+@pytest.mark.parametrize('value',['示例凭据', 'abc def', 'abc\nsecret', 'abc\tsecret', 'abc\x00secret'])
+def test_invalid_header_key_is_configuration_error(monkeypatch,value):
+    """Input：中文或内部空白/控制字符凭据；Expected Output：安全配置错误且零网络；测试请求头边界，目的为不把编码失败误报为规划校验失败或泄漏Key。"""
+    if '\x00' in value:
+        # 操作系统禁止NUL环境值，用环境读取替身覆盖相同边界。
+        original_get=__import__('os').environ.get
+        monkeypatch.setattr('os.environ.get',lambda name,default=None:value if name=='DEEPSEEK_API_KEY' else original_get(name,default))
+    else:
+        monkeypatch.setenv('DEEPSEEK_API_KEY',value)
+    with pytest.raises(LLMConfigurationError,match='DEEPSEEK_API_KEY 格式错误') as error:
+        DeepSeekInterviewClient()
+    assert value not in str(error.value)

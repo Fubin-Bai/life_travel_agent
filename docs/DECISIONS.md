@@ -11,7 +11,7 @@ Last reviewed: 2026-10-23
 - ADR-010 结构化 Itinerary、ADR-014 指标已实现；访谈与规划分离见 ADR-022～027。
 - ADR-013 Provider 解耦仍有效；具体实现已由 ADR-024 采用 DeepSeek，不再处于未选定状态。
 - ADR-016 指仓库文档作为事实源；本轮不推断已连接/推送 GitHub，也不自动 commit。
-- 当前没有长期 Memory、实时工具、Multi-Agent 或部署。V0 功能收尾不等于行程质量研究验收完成。
+- ADR-030 新增可启用的V1高德POI/驾车工具路径；仍无长期Memory、其他实时工具、Multi-Agent或部署。V0 功能收尾不等于行程质量研究验收完成。
 
 ## 1. 文档目的
 
@@ -1219,3 +1219,43 @@ Person/PersonCreate 新增可选 gender，female/male/other/prefer_not_to_say，
 partner 可以在适当时机引导中性、可拒绝的约会氛围征询，不能当成偏好事实；不问私密细节、不默认安排，拒绝或信息足够时停止。接受后只记录本次明确需求，不改长期资料。中文标签简化不改变 spouse/partner/family/sibling 的内部语义。
 
 不新增人群画像推断、优先级 Schema、固定问卷或对话历史。此决策记录现有实现，不授权新的推断机制。
+
+## ADR-030｜V1大陆高德工具与确定性Observation
+
+Status：Accepted / Implemented；V1已基本完成并收尾（2026-10-23），真实驾车/步行与Web成功，真实transit独立验收和质量评估待补。
+
+Problem：V0模型知识不能证明地点与地理距离有真实来源。
+
+Decision：独立tools Protocol/Pydantic输入输出，高德国内Web Service为首个实现；httpx作为显式运行依赖（原已通过SDK/开发环境安装）。初版历史预算为最多3次搜索/4候选/12有向驾车路线、16次HTTP；现行V1.1–V1.3预算为10次搜索/12候选/6有向组合最多12条游客路线、23次HTTP。Python固定确认大陆城市，每次5秒无重试，规范化后供原Planning消费。不引入Agent框架/Service/工具自主选择。
+
+保留默认v0兼容行为，设置LIFE_JOURNEY_PLANNING_MODE=amap明确启用V1；amap失败不静默回退。Key只环境读取，HTTP跳转关闭、请求日志不含Key，原始JSON不出适配器。空结果/无路线/超时/API错误分开。活动新增可选place_id，V1非空ID必须属于候选且至少一项引用；不是事实/可行性Constraint Validator。
+
+Trade-offs：单城市、小候选池、查询顺序偏置、英文关键词不翻译、无缓存且有配额/延迟成本。驾车估计不是步行/公交或未来交通，POI存在不是活动季节/营业可行。候选引用校验不证明全部自然语言事实，前端只通过已有notice显示来源，完整Observation在API响应中。
+
+Revisit：已有真实驾车/步行与Web成功证据；继续补独立真实transit和大陆固定场景重复质量验证，再根据证据评估召回/覆盖/路线模式；未经新授权不加入天气、酒店、航班、Memory、Replanning或大型Constraint系统。
+
+### ADR-030 实施迭代：多类别有限召回
+
+Owner授权继续完善V1，不进入V2。初版3搜索/4候选/全端点路线替换为：明确需求主词优先、有限别名最多24生成词/10实际搜索，每词2项，轮流取候选、按place_id去重到12并记录命中词与输入来源；每候选固定查坐标近邻一路，最多12条，总地图请求23。food_preferences加入正向来源，excluded只过滤，标签不推断；紧凑Observation避免重复POI正文。该迭代改变检索覆盖与预算，不引入新架构或LLM工具自主选择，不证明完整地理/语义可行性。fast文案与本次状态明确冲突时拒绝，未修改Interview状态规则。
+
+## ADR-031｜V1.2保守营业周规则与条件性核实
+
+Accepted / Implemented，Owner本轮授权。不额外获取详情，复用v3all搜索中的营业文本，只投影规范化周规则、原始文本值及来源时间。支持少数明确格式，异常/例外/跨夜等unknown；不从抓取时间推断未来营业，也不把unknown降级猜测成open。
+
+Python固定生成日期weekday/时段检查并核对模型结果，closed不返回、优先同类可用候选由当前一次Planning完成；无候选时明确缺口，不自动Replan。open仅为与时间窗有交集的周规则判断，始终需核实未来实际状态。后端控制opening_status/opening_note，前端最小显示核实提示；保持V0兼容，不改Interview、工具自主选择、请求预算或数据库。
+
+取舍：保守策略降低覆盖，复杂真实文本常为unknown；没有日历、有效期、假日公告或完整自然语言parser，文案防伪只是窄启发式。获得真实固定营业样本并评估后，再由Owner决定是否扩展，不以测试通过证明未来营业真实性。
+
+### ADR-030补充：V1.3游客交通参考
+
+Owner授权walking/transit扩展，沿用现有工具Protocol、Observation和单次Planning调用，不改核心架构。取前六个需求优先候选的近邻组合，每组最多两个游客模式，总路线预算12；1500米内先步行，其余先同城公交。驾车保留手动参考，单条失败unknown而不伪造或阻断整趟规划。取舍是预算内覆盖有限组合，不能宣称全部连续活动已验证；路线证据引用与窄模式检查不等于V2 Constraint Validator。真实步行和Web已验证，独立真实transit及重复规划质量仍待验证。
+
+### 本地.env加载补充（2026-10-23）
+
+按Owner授权，FastAPI create_app、CLI main、工具smoke main统一调用environment.load_project_env。使用python-dotenv轻量依赖，固定源码项目根目录路径、override=False、关闭插值，不按当前工作目录搜索、不打印任何配置值。此项取代此前不自动加载.env的约定；领域模型与客户端仍从os.environ读配置，既有系统变量优先，测试隔离真实.env。
+
+### V1收尾状态与已实现修正（2026-10-23）
+
+Owner确认V1基本完成，收尾不授权V2。保留原固定Python workflow和默认v0兼容；amap失败不回退模型编造。路线引用由Python按同日紧邻活动端点匹配并覆盖模型值，未查组合保持未验证；营业状态/说明同样由后端计算。保证性文案检查已按分句处理否定与未来核实动作，仍拒绝肯定保证和closed安排；这不是完整语义Constraint Validator。
+
+保留功能成功与质量验收分离：852项离线回归、真实驾车/步行及Web成功不证明未来班次/营业、稳定生成或个性化收益。当前剩余项见CURRENT_STATUS，不通过追加框架、隐藏重试或自动Replanning掩盖失败。

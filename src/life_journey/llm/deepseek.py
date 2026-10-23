@@ -55,6 +55,8 @@ class DeepSeekInterviewClient:
         key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
         if not key:
             raise LLMConfigurationError("DEEPSEEK_API_KEY 未配置")
+        if not key.isascii() or any(ord(char) < 33 or ord(char) > 126 for char in key):
+            raise LLMConfigurationError("DEEPSEEK_API_KEY 格式错误：含非 ASCII 字符或内部空白，请检查启动终端环境变量；系统环境优先于.env")
         self.config = config or DeepSeekConfig.from_env()
         if sdk_client is None:
             self._client = OpenAI(

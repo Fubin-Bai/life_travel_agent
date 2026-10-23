@@ -2,6 +2,7 @@
 from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 from .itinerary import Itinerary
+from life_journey.tools.schemas import PlanningObservation
 
 V0_FACT_NOTICE = "V0 行程基于模型知识生成；未验证营业时间、交通、价格或实时信息，请出行前核实。"
 
@@ -19,4 +20,5 @@ class PlanningResponse(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     itinerary: Itinerary
     notice: str = V0_FACT_NOTICE
+    observation: PlanningObservation | None = None
     metrics: dict[str, str | int | float | None] | None = None

@@ -59,3 +59,15 @@ PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.interview --output ev
 不同报告可能包含 Prompt/评分规则变化，不能直接把通过率差异当成严格受控提升。全部结果保留，不选择最好一次；现有八例不是行程质量 Evaluation。伴侣适度征询允许中性提问，旧禁用词扫描可能将澄清也标为风险，需人工复核；性别不同输入的成对行为尚未覆盖。
 
 当前仍缺：itinerary evaluator、普通规划 Prompt 与个性化版本的对照、多次重复与人工相关性/约束评分、真实事实与可行性验证。一次虚构规划3天9活动 smoke只证明请求/结构/日期可贯通，未形成可提交的行程质量 benchmark 报告。V0 功能收尾不等于完成这些研究验收。
+
+## V1第一阶段验证边界
+
+本轮不改Interview，现有六/八例不覆盖地图召回或工具辅助行程，不重复运行无关真实访谈。新增test_amap_tools/test_planning_observation使用MockTransport/fake验证大陆范围、规范化、失败、凭据日志、调用上限、API门槛、候选引用与V0兼容；普通pytest完全离线。真实高德smoke未配置Key而明确失败，不能声称真实查询或推荐质量已验证。后续需建立大陆工具结果与行程引用/相关性固定案例；操作见docs/V1_TOOLS.md。
+
+V1多类召回本轮新增离线tests/test_candidate_retrieval.py，覆盖有限别名/类别优先、来源、排除、去重、候选/路线预算和fast冲突；完整761测试通过。既有Interview真实benchmark不是检索或Planning评估，未重复跑无关访谈。扩展候选的真实覆盖率、多样性/重复率与节奏遵循尚需固定大陆场景和真实LLM验证，不从fake回归推断推荐质量提升。
+
+V1.2营业时间新增tests/test_opening_hours.py：固定离线测试检查周规则、闭店、unknown、未来日期与API返回防伪，完整800通过。现有Interview benchmark不覆盖本功能；尚无真实营业文本覆盖率/LLM营业遵循专项报告，不把fake通过视为未来营业事实保证。
+
+## V1收尾验证范围
+
+V1已基本完成，但本目录仍是Interview质量benchmark，不是工具召回或Itinerary质量评分器。真实驾车/步行与Web4天行程成功只说明功能闭环，852项离线测试验证协议与规则；独立真实transit、重复失败率、跨场景召回/个性化对照仍待补证据。V2尚未开始，不因收尾新增评分器或自动工具选择。

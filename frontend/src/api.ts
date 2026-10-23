@@ -135,6 +135,8 @@ export type Itinerary = {
       title: string;
       description: string;
       rationale: string;
+      opening_status?: "open_by_weekly_rule" | "unknown" | null;
+      opening_note?: string | null;
     }[];
   }[];
 };

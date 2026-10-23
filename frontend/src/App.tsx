@@ -696,6 +696,8 @@ export default function App() {
                         </small>
                         <h4>{activity.title}</h4>
                         <p>{activity.description}</p>
+                        {/* 营业结论由后端计算，周规则窗口不等于未来保证。 */}
+                        {activity.opening_note && <p className="activity-rationale">{activity.opening_note}</p>}
                         <p className="activity-rationale">
                           为什么适合你 · {activity.rationale}
                         </p>

@@ -38,9 +38,9 @@ ARCHITECTURE.md 必须明确区分 **Current Architecture**（代码中真实存
 
 路线图不是实施授权。不得把探索方案自动开发为正式功能。
 
-## 3. 当前 V0 边界
+## 3. 当前阶段边界
 
-当前约定阶段为 **V0 — Personalized Travel Recommendation Validation**；具体进度以 CURRENT_STATUS 和代码为准。
+V0 已收尾；Owner 已确认 V1 基本完成并进入收尾，已实现中国大陆单城市高德 POI、营业周规则、步行/公交/驾车工具与 Planning Observation，保持确定性 Python 工作流。V2 尚未开始，后续开发须另行授权。具体实现和未验证边界以 CURRENT_STATUS 与代码为准，不把本阶段扩展到工具自主选择、Memory 或其他未授权功能。
 
 验证结构化的 Person、Relationship、Trip Participants 和 Trip Context 能否产生明显更个性化的旅行规划。允许人工数据、Python objects、JSON 和 fixtures。
 

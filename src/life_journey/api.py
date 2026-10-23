@@ -1,6 +1,8 @@
 """最薄本地 HTTP 层：复用已有 Create/领域模型与创建函数，访谈复用现有 runner，不复制业务规则。"""
 
 from contextlib import asynccontextmanager
+from life_journey import environment
+
 import os
 from pathlib import Path
 import sqlite3
@@ -23,6 +25,8 @@ from life_journey.llm.base import InterviewLLMClient, LLMClientError, LLMConfigu
 from life_journey.application.planning import run_planning
 from life_journey.llm.planning import PlanningLLMClient
 from life_journey.schemas.planning import PlanningResponse
+from life_journey.tools import AmapPlaceTools, PlaceTools, ToolError, ToolConfigurationError, UnsupportedDestinationError, NoPlacesError
+from life_journey.application.planning_observation import collect_planning_observation
 from life_journey.schemas.interview_api import InterviewMessage, InterviewResponse
 
 
@@ -37,8 +41,12 @@ async def parse_input(request: Request, schema):
         raise HTTPException(422, detail=errors) from None
 
 
-def create_app(database_path: str | Path | None = None, *, llm_client: InterviewLLMClient | None = None, planning_client: PlanningLLMClient | None = None) -> FastAPI:
+def create_app(database_path: str | Path | None = None, *, llm_client: InterviewLLMClient | None = None, planning_client: PlanningLLMClient | None = None, place_tools: PlaceTools | None = None, planning_mode: str | None = None) -> FastAPI:
     """允许测试注入临时数据库；默认本地文件不依赖运行目录。"""
+    environment.load_project_env()
+    mode = planning_mode or os.environ.get("LIFE_JOURNEY_PLANNING_MODE", "v0")
+    if mode not in {"v0", "amap"}:
+        raise ValueError("LIFE_JOURNEY_PLANNING_MODE 仅允许 v0 或 amap")
     path = Path(database_path or os.environ.get("LIFE_JOURNEY_DB", "") or
                 Path(__file__).resolve().parents[2] / ".local" / "life_journey.sqlite3").expanduser().resolve()
 
@@ -256,12 +264,24 @@ def create_app(database_path: str | Path | None = None, *, llm_client: Interview
         if not check_minimum_readiness(context, state):
             raise HTTPException(409, "请先完成这次旅行的访谈")
         owned_client = None
+        owned_tools = None
         try:
+            observation = None
+            if mode == "amap":
+                if place_tools is None:
+                    owned_tools = AmapPlaceTools()
+                observation = collect_planning_observation(context, place_tools or owned_tools)
             if planning_client is None:
                 from life_journey.llm.deepseek import DeepSeekInterviewClient, DeepSeekConfig
                 config = DeepSeekConfig.from_env()
                 owned_client = DeepSeekInterviewClient(DeepSeekConfig(model=config.model, max_output_tokens=8192, timeout_seconds=120))
-            result = run_planning(context, state, planning_client or owned_client)
+            result = run_planning(context, state, planning_client or owned_client, observation)
+        except ToolConfigurationError as exc:
+            raise HTTPException(503, str(exc)) from None
+        except (UnsupportedDestinationError, NoPlacesError) as exc:
+            raise HTTPException(422, str(exc)) from None
+        except ToolError as exc:
+            raise HTTPException(502, str(exc)) from None
         except LLMConfigurationError as exc:
             raise HTTPException(503, str(exc)) from None
         except LLMClientError as exc:
@@ -269,6 +289,8 @@ def create_app(database_path: str | Path | None = None, *, llm_client: Interview
         except (ValueError, TypeError):
             raise HTTPException(502, "规划输出未通过校验，请稍后重试") from None
         finally:
+            if owned_tools is not None:
+                owned_tools.close()
             if owned_client is not None:
                 owned_client.close()
         with connect(path) as db:

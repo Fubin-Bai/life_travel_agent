@@ -4,7 +4,7 @@ Last updated: 2026-10-23
 
 ## Current Architecture｜当前实现
 
-V0 本地 Web 闭环已实现，功能收尾；不是生产部署，也不是推荐质量已完成验收。
+V0 本地 Web 闭环已收尾；V1已基本完成并收尾，新增可启用的大陆高德工具路径；V2尚未开始。不是生产部署，也不是推荐质量已完成验收。
 
 ```text
 React / Vite / TypeScript
@@ -126,14 +126,52 @@ Trip 与参与者原子创建；访谈 Trip.context 与 InterviewState 同一事
 
 ### Provider、Web 与开发入口
 
-当前实现配置为 DeepSeek Responses，BASE_URL=https://api.deepseek.com，默认 deepseek-flash，可用环境变量覆盖。SDK 使用 instructions/input 和 text.format=json_schema，非流式、reasoning=none、自动重试关闭。普通访谈2048 output tokens/60秒；Web规划8192/120秒。配置来自 os.environ，不自动读取 .env，不记录 Key、完整 Prompt 或原始响应。记录可获得的 model/tokens/latency，缺失为 None，不虚构费用。
+当前实现配置为 DeepSeek Responses，BASE_URL=https://api.deepseek.com，默认 deepseek-flash，可用环境变量覆盖。SDK 使用 instructions/input 和 text.format=json_schema，非流式、reasoning=none、自动重试关闭。普通访谈2048 output tokens/60秒；Web规划8192/120秒。配置来自 os.environ，入口自动读取项目根目录 .env，系统环境优先，不记录 Key、完整 Prompt 或原始响应。记录可获得的 model/tokens/latency，缺失为 None，不虚构费用。
 
 前端 React/Vite/TypeScript/原生 CSS；照片本地 public/journey-flower.jpg，桌面取景右移以避开正文，暗调视觉、中文关系标签。共用 PersonFields 支持性别/MBTI，form/input autocomplete=off。当前只做 turn-based，无 streaming/打断/并发消息队列。开发代理 /api→8000，CORS 仅本地5173；启动见根 README。
 
-CLI 复用 sample_data 固定场景，仅内存访谈，就绪退出，不生成 itinerary。tests 使用 fake Client/临时数据库；真实访谈 benchmark 独立手动运行，报告与边界见 evaluations/README.md。最新功能检查692 pytest通过、前端build通过，推荐质量验收尚未完成。
+CLI 复用 sample_data 固定场景，仅内存访谈，就绪退出，不生成 itinerary。tests 使用 fake Client/临时数据库；真实访谈 benchmark 独立手动运行，报告与边界见 evaluations/README.md。最近完整852 pytest通过、前端build通过，推荐质量验收尚未完成。
 
 ## Approved V0 Design｜尚未完成的验证
 
 本地核心流程已经实现，不再把它列为待开发。原 V0 的普通 Prompt baseline 对照、成对场景多次运行、行程个性化/限制一致性评分仍缺少完整证据；尚无 itinerary evaluator。保留为验证缺口，不把功能收尾说成研究假设已获证明。
 
-未来实时信息、工具、Memory、部署等见 ROADMAP，均未在当前任务授权开发。
+V1已实现地点、营业周规则和游客路线工具；其他实时信息、Memory、部署等仍见 ROADMAP，未获当前任务开发授权。
+
+## Current Architecture｜V1大陆工具路径
+
+独立 tools/schemas、base、amap 层通过 httpx 调用国内高德Web Service。仅适配器解析原始JSON；规划只消费Pydantic PlanningObservation。独立 tools/smoke 命令不依赖LLM/SQLite。API增加可注入PlaceTools与planning_mode，现有V0调用保留默认行为。
+
+LIFE_JOURNEY_PLANNING_MODE=v0（默认）：原模型知识流程。amap：既有门槛后由Python collect_planning_observation固定确认大陆单城市、最多10次检索（每词2项）、按查询轮流选取/ID去重得到12候选、取前六个候选的近邻有向组合，近处步行/远处公交，必要时补另一游客模式（最多12请求），再传给原run_planning的可选observation参数。最多23次高德HTTP、每次5秒、无重试；失败不转回V0。不是LLM工具选择，不修改Interview/Readiness，不新增Service/框架/表。
+
+ItineraryActivity可选place_id保持旧输出兼容；V1至少一个候选引用，所有非空ID必须存在于Observation候选池。自由休息等活动可为None；尚不能语义验证每句话或所有None活动中的地名。PlanningResponse可选observation记录来源、查询请求、规范化POI/路线和时间。原notice切换为高德来源与未验证说明，前端不重排。
+
+搜索限制城市行政范围；境外、港澳台、多城市、省份或无法唯一确认城市返回422。合法空搜索保留；全部空则422且LLM零调用。合法无路线为no_route/数值None；城市/搜索网络/超时/API错误/坏数据/跨城POI为502；单条路线异常单独记录unknown、缺Key503；输入仍走现有Pydantic与API边界。Key仅环境读取、不入日志/Prompt/前端；关闭HTTP跳转，HTTP库不记录请求URL。
+
+V1来源不证明未来营业、价格、季节、未查询路线或未来实际交通，更不是Constraint Validator。Owner已提供真实工具smoke成功证据；最近852项单测离线；暂无工具召回与行程质量Evaluation。配置与完整契约见 [V1_TOOLS](V1_TOOLS.md)。
+
+V1候选召回迭代：有限同义表与明确输入来源生成最多24词，主词优先覆盖类别、执行前10；excluded只过滤不正向检索，food_preferences也参与。不读性别/MBTI/关系标签。Place增加source_keywords，Observation增加retrieval_queries，按query轮流取前后名次防止首类别垄断，按place_id去重合并命中词。Prompt去掉搜索与路线中的重复POI正文，仅以ID引用。
+
+Planning明确本次TripContext节奏优先，取消无条件“少量/留白”和小候选池可直接重复的偏置；fast下明确慢文案拒绝（窄词汇检查，非完整语义校验）。不改Interview、工具选择或工作流框架。真实召回覆盖/Planning质量尚待评估，离线通过不证明已消除所有重复或语义冲突。
+
+## Current Architecture｜V1.2营业周规则
+
+Place新增OpeningHours（known/unknown、weekly、原始文本值/字段、来源/获取时间、Asia/Shanghai、不确定原因）；原始高德JSON仍只在适配器处理。复用现有all搜索中的biz_ext.opentime2/open_time，无额外HTTP/详情工具。
+
+新tools/opening_hours.py纯函数只解析少量明确星期/时间区间/闭馆；坏值/例外/季节/跨夜/裸今日时间为unknown，不使合法POI失败。application收集Observation时生成本次weekday×时段检查，最多12×7×3项；Prompt精简引用并给出日期weekday映射。open表示周规则与时段窗口有交集而非未来实际营业验证，closed明确无交集，unknown不可猜。
+
+返回前按实际行程日期/时段重算，closed安全拒绝；unknown或条件周规则的保证性营业文案拒绝（窄词汇启发式）。模型opening_status/note被后端覆盖，前端原活动样式新增一行核实说明。全候选全时段closed时允许仅通用自由活动并明确需求缺口，不自动换点/重跑。此为V1.2最小营业检查，不是通用Constraint Validator或V2工具选择，不改Interview/数据库/路由。
+
+V1.2阶段800离线测试、前端build/依赖/语法检查通过；实际复杂营业解析覆盖、未来假日与LLM质量尚未验证。细节见V1_TOOLS。
+
+## Current Architecture｜V1.3交通Observation
+
+RouteRequest按walking/transit/driving分派高德v3接口；RouteResult输出端点ID、模式、状态、米/秒、公交可选步行距离/换乘数、来源时间。unknown/no_route没有数值。最多六个有向候选组合、十二次请求，粗距1500米内先步行，其余先公交；失败/步行超过30分钟补另一模式。没有全矩阵查询，驾车仅保留直接工具能力；不改变候选需求优先级。
+
+单条路线ToolError隔离成unknown，不阻断Planning；POI/城市错误仍停止。ItineraryActivity可选route_from_previous只引用同日紧邻活动间匹配route_id，后端按同日连续活动端点生成route_from_previous和route_note，模式/分钟窄校验避免串用证据。高交通成本由Prompt要求解释取舍，不自动替换用户明确需求，不做Replanning/通用Constraint Validator。前端布局及Interview不变。详细预算、Schema与smoke见V1_TOOLS的V1.3段；真实步行和Web规划已验证成功；独立真实transit、重复成功率与Planning质量Evaluation待验证。
+
+营业保证文案检查按分句及转折限定否定/待核实作用域；未来向商家确认营业时间不等于已确认营业。不跨分句借用提醒掩盖肯定保证；仍为窄启发式，非完整自然语言事实判断。
+
+## V1收尾验证边界
+
+Owner于2026-10-23确认V1基本完成。真实浏览器已通过原Planning API生成北京4天行程，营业文案误判修复后再次成功；真实步行smoke已通过。公交独立真实成功记录和重复质量验收仍缺失，不能把Web成功视为所有候选/路线/未来事实已验证。功能架构保持确定性Python，不自动进入V2。

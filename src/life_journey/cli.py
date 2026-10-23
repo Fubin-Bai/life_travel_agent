@@ -1,5 +1,7 @@
 """开发用内存访谈终端；不保存历史、不自动规划。"""
 
+from life_journey import environment
+
 import argparse
 
 from life_journey.application import (
@@ -56,6 +58,7 @@ def run_cli(client: InterviewLLMClient, *, debug: bool = False) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     """仅在终端入口组合具体 Provider；沿用环境变量配置。"""
+    environment.load_project_env()
     parser = argparse.ArgumentParser(description="人生旅迹 V0 开发访谈")
     parser.add_argument("--debug", action="store_true", help="显示每轮调用指标与就绪状态")
     args = parser.parse_args(argv)

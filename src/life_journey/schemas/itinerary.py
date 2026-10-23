@@ -13,6 +13,11 @@ class ItineraryActivity(BaseModel):
     title: NonEmptyString
     description: NonEmptyString
     rationale: NonEmptyString
+    route_from_previous: NonEmptyString | None = Field(default=None, description="后端按同日紧邻活动端点匹配的Observation route_id；模型应省略或设null。")
+    route_note: NonEmptyString | None = None
+    opening_status: Literal["open_by_weekly_rule", "unknown"] | None = None
+    opening_note: NonEmptyString | None = None
+    place_id: NonEmptyString | None = Field(default=None, description="V1 具体地点引用已查询 POI；V0 或非地点活动为 None。")
 
 
 class ItineraryDay(BaseModel):
