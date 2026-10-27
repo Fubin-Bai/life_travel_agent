@@ -70,4 +70,34 @@ V1.2营业时间新增tests/test_opening_hours.py：固定离线测试检查周�
 
 ## V1收尾验证范围
 
-V1已基本完成，但本目录仍是Interview质量benchmark，不是工具召回或Itinerary质量评分器。真实驾车/步行与Web4天行程成功只说明功能闭环，852项离线测试验证协议与规则；独立真实transit、重复失败率、跨场景召回/个性化对照仍待补证据。V2尚未开始，不因收尾新增评分器或自动工具选择。
+V1已基本完成，但本目录仍是Interview质量benchmark，不是工具召回或Itinerary质量评分器。真实驾车/步行与Web4天行程成功只说明功能闭环，852项离线测试验证协议与规则；独立真实transit、重复失败率、跨场景召回/个性化对照仍待补证据。这是V1收尾时的历史边界；2026-10-26另行授权V2，新增smoke见下节，未新增质量评分器。
+
+## V2 Agent smoke（独立于Interview benchmark）
+
+2026-10-26新增`life_journey.evaluation.agent_smoke`，固定虚构人物/旅行，两类明确活动场景，不读SQLite、不把期望结果发给模型；实际输出脱敏行动trace、次数/状态/停止原因和行程。不是质量scorer，不代表稳定收益已验收。
+
+```bash
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.agent_smoke --city 北京 --case architecture_art --max-tool-calls 4
+```
+
+会真实调用高德与DeepSeek；普通pytest全离线，不能把此命令放入自动单测。首次真实场景闭店安排被原守卫拒绝，保留失败；无自动Replanning。详见[V2说明](../docs/V2_AGENT.md)，真实结果按运行记录如实更新。
+
+V2真实结果：architecture_coffee在finalize被closed守卫拒绝；architecture_art两次search均ok、4候选、0路线，sufficient_evidence后生成3天行程，约21.5秒。不能以第二次成功抹去第一次失败，也不能据此证明真实路线选择或质量提升。
+
+## V3/V4固定离线评估
+
+新增`v3_constraints.json`的12个合成场景，运行`PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.constraints`；输出硬冲突前后比例、脚本修复成功率、硬问题解决率和unsupported事实场景比例。补丁为预设，不能称为真实LLM修复质量。
+
+运行`PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.memory_rag`比较4个固定No Memory/With Memory夹具，使用fake语义向量和脚本Planner，报告偏好匹配、实际Validator硬冲突、召回相关性和无关个性化比例。这证明检索/隔离/信息流，不代表真实Embedding/LLM收益。真实smoke入口见V3/V4文档；本轮未运行联网验收。
+
+本轮可复核结果：[V3规则报告](v3_constraints_report.json)、[V4夹具报告](v4_memory_report.json)。
+
+## Agent Behavioral Harness
+
+`PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.harness_behavior --output evaluations/harness_behavior_report.json`运行11个固定真实LangGraph/fake依赖场景，聚合预算、重复保护、Memory隔离、校验/修复、未解决停止等行为指标；[报告](harness_behavior_report.json)保留每例断言、summary与脱敏trace。
+
+`PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.harness_smoke`默认离线展示组合运行，不使用正式数据或真实服务。行为符合率与运行成功率分开：当前11/11行为符合，其中1例故意unresolved。不把这些结果当作新模型评分或真实性能基准。
+
+## 2026-10-27 本地手动验收
+
+真实Embedding返回2条1024维BAAI/bge-m3向量；Web Feedback返回记忆ID，证明长期偏好写入成功。Owner确认RAG检索完成，本次未归档planning检索来源响应；不将其计入固定评估得分或声称真实召回率100%。Web行程中的闭店/星期文字冲突仍待核查。验收分层与展示步骤见[本地展示指南](../docs/LOCAL_DEMO.md)。

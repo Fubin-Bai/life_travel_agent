@@ -40,7 +40,7 @@ ARCHITECTURE.md 必须明确区分 **Current Architecture**（代码中真实存
 
 ## 3. 当前阶段边界
 
-V0 已收尾；Owner 已确认 V1 基本完成并进入收尾，已实现中国大陆单城市高德 POI、营业周规则、步行/公交/驾车工具与 Planning Observation，保持确定性 Python 工作流。V2 尚未开始，后续开发须另行授权。具体实现和未验证边界以 CURRENT_STATUS 与代码为准，不把本阶段扩展到工具自主选择、Memory 或其他未授权功能。
+V0 已收尾；Owner 已确认 V1 基本完成并进入收尾，已实现中国大陆单城市高德 POI、营业周规则、步行/公交/驾车工具与 Planning Observation，保持确定性 Python 工作流。Owner于2026-10-26先授权V2，随后明确授权连续实现V3 Validator/Local Replanning和V4 Memory/RAG面试原型，保留旧模式。具体实施与未验证边界以CURRENT_STATUS、V3/V4专项文档和代码为准；不自动进入V5、Multi-Agent、训练或生产化。
 
 验证结构化的 Person、Relationship、Trip Participants 和 Trip Context 能否产生明显更个性化的旅行规划。允许人工数据、Python objects、JSON 和 fixtures。
 

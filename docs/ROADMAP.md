@@ -1,8 +1,8 @@
 # 人生旅迹｜开发路线图 Roadmap
 
-Last updated: 2026-10-23
+Last updated: 2026-10-27
 
-**阶段快照**：V0已收尾；Owner确认V1基本完成，当前收尾，V2尚未开始。V1已具备大陆单城市高德POI、多类有限召回、保守营业周规则及步行/同城公交Observation，真实Web规划已有成功记录。真实公交独立验收、重复成功率和推荐质量对照仍待验证；不把收尾等同于全面质量验收，V2–V6仍为计划而非实施授权。
+**阶段快照**：V0/V1保留，V2单Agent、V3 Validator/Local Replanning、V4 Memory/RAG已按Owner本轮授权实现本地面试原型。V3/V4专项文档为当前实施事实；下文阶段研究目标不代表全部质量指标已验证。真实Embedding与长期偏好写入已通过，Owner确认RAG检索完成；系统质量基线与独立V3/V4 smoke证据待补；V5/V6仍为计划，不自动实施。
 
 ## 1. 总体开发原则
 
@@ -258,6 +258,8 @@ LLM 不应该猜：
 
 ## 4. V2｜Tool-Using Workflow
 
+当前实现：Owner明确要求直接接入LangGraph，已实现单Agent状态图和原生function calling工具选择，保留V1 deterministic模式。预算/参数/重复/recursion由Python限制，finalize复用现有Planning，不进入V3。具体契约与真实smoke限制见[V2_AGENT](V2_AGENT.md)及CURRENT_STATUS。
+
 ### 核心问题
 
 V1 有工具之后，需要解决：
@@ -274,15 +276,14 @@ V1 有工具之后，需要解决：
 
 ---
 
-### 可能的 Tools
-
-例如：
+### 本轮已暴露的Tools
 
 - search_places
-- get_place_details
-- get_opening_hours
-- get_route
-- get_weather
+- get_walking_route
+- get_transit_route
+- get_driving_route（补充）
+
+营业信息随POI返回，不新增独立营业工具；get_place_details、天气及其他工具未实施，不属于本轮授权。
 
 每个 Tool 应该职责单一、输入输出清晰。
 
@@ -310,7 +311,9 @@ Agent 能够根据任务：
 
 ---
 
-## 5. V3｜Constraint Validation & Local Replanning
+## 5. V3｜Constraint Validation & Local Replanning（原型已实现）
+
+当前仅包含[V3_CONSTRAINTS](V3_CONSTRAINTS.md)列明的规则/局部修复。以下为阶段研究目标；Budget/实时体力/用户后续自然语言改稿接口尚未实现，不因阶段标题声称已完成。
 
 ### 核心问题
 
@@ -385,7 +388,9 @@ Agent 能够根据任务：
 
 ---
 
-## 6. V4｜Long-term Memory
+## 6. V4｜Long-term Memory（原型已实现）
+
+当前为[V4_MEMORY](V4_MEMORY.md)的显式反馈/作用域RAG原型。以下Memory例子与研究方向不是自动学习能力清单；行为归因、Wishlist/摘要/遗忘管理仍待实现。
 
 ### 核心问题
 
@@ -665,3 +670,5 @@ Multi-Agent 是可能的技术选择，而不是项目目标。
 以及：
 
 > 为什么当前阶段值得使用它？
+
+当前具体实现、固定评估与未验证边界见[V3](V3_CONSTRAINTS.md)、[V4](V4_MEMORY.md)。本轮不进入V5。

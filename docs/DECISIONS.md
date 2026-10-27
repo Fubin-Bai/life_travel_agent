@@ -1259,3 +1259,47 @@ Owner授权walking/transit扩展，沿用现有工具Protocol、Observation和�
 Owner确认V1基本完成，收尾不授权V2。保留原固定Python workflow和默认v0兼容；amap失败不回退模型编造。路线引用由Python按同日紧邻活动端点匹配并覆盖模型值，未查组合保持未验证；营业状态/说明同样由后端计算。保证性文案检查已按分句处理否定与未来核实动作，仍拒绝肯定保证和closed安排；这不是完整语义Constraint Validator。
 
 保留功能成功与质量验收分离：852项离线回归、真实驾车/步行及Web成功不证明未来班次/营业、稳定生成或个性化收益。当前剩余项见CURRENT_STATUS，不通过追加框架、隐藏重试或自动Replanning掩盖失败。
+
+## ADR-032｜V2使用LangGraph进行单Agent工具决策
+
+Status：Accepted / Implemented，Owner于2026-10-26明确授权，取代此前“V2未开始”的阶段限制，不授权V3。
+
+Problem：V1固定搜索词/路线组合不能由模型根据已取得证据动态换词、查路线或停止。
+
+Decision：直接采用LangGraph StateGraph的agent/tools/finalize及条件边，不先做手写Tool Loop；用TypedDict状态、Pydantic参数/决定/预算，Provider-independent AgentLLMClient由既有DeepSeek Responses原生function calling实现。LangGraph仅编排，不替代domain/Pydantic/高德adapter/SQLite/现有Planning。amap兼容原V1，agent显式启用，API返回契约和前端不改。
+
+Python继续固定大陆单城市与已查ID范围、次数/候选/route上限、缓存同参数（含失败）、强制预算终止和recursion；无候选不进入凭空知识规划。finalize仍执行原V1守卫，拒绝不合规输出，不自动Replan或隐藏重试。指标只含安全行动轨迹及真实调用计数/token/latency。
+
+Trade-offs：引入langgraph>=1.0.6,<2（当前环境1.2.17）及其langchain-core、langsmith等传递依赖，依赖树比V1大；不使用高层LangChain Agent或其他Provider封装，不自动启用LangSmith追踪，所有图执行显式禁用外部追踪。每次请求图状态在内存，无checkpoint/长期Memory。默认8次决策+1次finalize、12次工具尝试，时延/成本仍需实测，不因框架接通宣称质量提升。
+
+Revisit：获得固定V2场景重复运行的工具覆盖、失败率、成本/时延证据后再讨论预算与策略。不把修复finalize质量扩展成V3 Validator/Replanning，也不引入RAG、多Agent、酒店/航班/天气或部署。
+
+官方接口依据：[LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)、[DeepSeek Responses](https://api-docs.deepseek.com/api/create-response/)。
+
+## ADR-033｜V3保留草稿诊断与日级局部补丁
+
+Accepted / Implemented prototype，Owner本轮明确授权V3/V4，取代ADR-032“不授权V3”的历史边界。保留V0/V1及默认V2行为，通过VALIDATION开关开启V3，memory模式始终开启。选择独立DraftItinerary + deterministic Validator + ReplanPatch，而不是放宽旧Itinerary或重新写整份行程。最多2轮，工具预算不增加；失败保留草稿并明确unresolved。取舍：有限词表/事实启发式、以天修复且不新增取证，不能保证总能修好或语义全面正确。固定脚本评估不是真实LLM修复成功率。
+
+## ADR-034｜V4使用SQLite向量与显式反馈写入
+
+Accepted / Implemented local prototype。选择SQLite JSON向量+应用层精确余弦，复用已有数据库而不引入FAISS/Chroma服务；最多200条scope候选与Top5，代价是缺少大规模索引/自动重嵌入。Embedding独立Protocol及明确配置的兼容HTTP服务，不假设DeepSeek具备Embedding，不用假向量替代生产服务。
+
+写入保守显式长期反馈，区分Person/Relationship/Trip、explicit/inferred/confirmed；inferred需多次观察且永远软参考。去重/结构化冲突覆盖保留历史inactive，确认必须显式给ID。当前Trip优先，scope先于语义；不把全部聊天或记忆注入Prompt。尚无自动行为归因、复杂语义冲突处理或真实模型收益证据，面试表述应为可运行原型。未新增V3/V4依赖。
+
+## ADR-035｜在LangGraph之上集中轻量Runtime Harness
+
+Accepted / Implemented local prototype，Owner明确授权V4工程化收口，不进入V5。
+
+Problem：现有工具预算、重复保护、trace、修复计数和Memory TopK分散在业务模块，失败归因与计数口径难以统一。
+
+Decision：保留LangGraph节点与条件边，用每run一个AgentHarness包裹graph.invoke；冻结HarnessPolicy统一默认值，旧AgentBudget/常量兼容引用。Graph State只放业务事实，Context放运行生命周期/计数/结构化错误，缓存私有且不跨run。十二个观察hooks默认no-op，非critical失败不影响结果，critical显式终止。既有debug metrics增加脱敏summary/trace，默认API不变；添加11例behavioral evaluation，不新增模型质量评分或产品功能。
+
+Recovery：已知Tool/非法参数可以预算内恢复；模型或Validator失败安全终止；Memory默认fail，显式策略才允许带提醒降级；普通局部修复失败保留原稿但消耗轮次。预算终止不是内部bug，未解决硬约束不能标为valid。
+
+Trade-off：普通同步Python实现、无新依赖，易解释和离线测试；但不是独立Agent框架、强制取消器或分布式运行系统。Hook只支持可信同步代码，Context/trace不持久化，API外围检查不在run生命周期内。固定桩的行为指标不是模型质量或真实API性能证据。
+
+## ADR-036｜本地展示采用固定向量服务配置（2026-10-27）
+
+问题：V4需要实际向量服务以完成长期偏好写入与检索演示。决定：本地默认memory，DeepSeek官方接口保持生成职责，Embedding选择硅基流动BAAI/bge-m3完整HTTPS接口。保留Provider抽象和旧amap/agent模式，不迁移生成接口、不增加依赖。真实调用已返回1024维向量。
+
+取舍：新增独立Key和外部服务依赖；模型或服务不可用时按既有错误策略处理，不生成假向量。默认固定模型以避免混用向量空间；服务下线、权限变化或有对照质量证据时再评估更换，并处理已有向量重建。Key仅本地.env，模板不含凭据。

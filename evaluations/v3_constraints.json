@@ -1,0 +1,4015 @@
+{
+  "description": "固定合成规则评估；补丁为预设脚本，不代表真实LLM修复质量",
+  "base": {
+    "context": {
+      "trip": {
+        "trip_id": "trip_tokyo_alex_bella_slow",
+        "participant_ids": [
+          "person_alex",
+          "person_bella"
+        ],
+        "destination": "北京",
+        "start_date": "2026-11-10",
+        "end_date": "2026-11-12",
+        "budget": {
+          "min_amount": "2000",
+          "max_amount": "3000",
+          "currency": "AUD"
+        },
+        "context": {
+          "purpose": "共同探索城市",
+          "preferred_pace": "slow",
+          "activity_preferences": [
+            "设计展",
+            "历史街区"
+          ],
+          "required_activities": [],
+          "excluded_activities": []
+        }
+      },
+      "participants": [
+        {
+          "person_id": "person_alex",
+          "name": "Alex",
+          "gender": null,
+          "interests": [
+            "独立咖啡馆",
+            "设计",
+            "城市散步"
+          ],
+          "dislikes": [
+            "拥挤",
+            "大型主题乐园"
+          ],
+          "preferred_pace": "fast",
+          "food_preferences": [
+            "咖啡"
+          ],
+          "mbti": "INFP"
+        },
+        {
+          "person_id": "person_bella",
+          "name": "Bella",
+          "gender": null,
+          "interests": [
+            "博物馆",
+            "历史",
+            "建筑"
+          ],
+          "dislikes": [
+            "夜生活"
+          ],
+          "preferred_pace": "moderate",
+          "food_preferences": [
+            "当地菜"
+          ],
+          "mbti": null
+        }
+      ],
+      "relationships": [
+        {
+          "relationship_id": "relationship_alex_bella",
+          "person_a_id": "person_alex",
+          "person_b_id": "person_bella",
+          "relationship_type": "friend",
+          "shared_travel_preferences": [
+            "一起看设计展",
+            "探索历史街区"
+          ],
+          "preferred_pace_together": "moderate"
+        }
+      ]
+    },
+    "observation": {
+      "city": {
+        "name": "北京市",
+        "adcode": "110000"
+      },
+      "searches": [],
+      "places": [
+        {
+          "place_id": "p1",
+          "name": "p1",
+          "address": null,
+          "category": null,
+          "adcode": "110101",
+          "location": {
+            "longitude": 116.4,
+            "latitude": 39.9,
+            "system": "GCJ-02"
+          },
+          "source_keywords": [
+            "设计展",
+            "历史街区",
+            "咖啡店",
+            "北京特色美食",
+            "独立咖啡馆",
+            "设计",
+            "步行街",
+            "博物馆",
+            "历史",
+            "建筑"
+          ],
+          "opening_hours": {
+            "status": "known",
+            "weekly": [
+              {
+                "weekday": 0,
+                "status": "closed",
+                "intervals": []
+              },
+              {
+                "weekday": 1,
+                "status": "closed",
+                "intervals": []
+              },
+              {
+                "weekday": 2,
+                "status": "closed",
+                "intervals": []
+              },
+              {
+                "weekday": 3,
+                "status": "closed",
+                "intervals": []
+              },
+              {
+                "weekday": 4,
+                "status": "closed",
+                "intervals": []
+              },
+              {
+                "weekday": 5,
+                "status": "closed",
+                "intervals": []
+              },
+              {
+                "weekday": 6,
+                "status": "closed",
+                "intervals": []
+              }
+            ],
+            "source_text": "永久停业",
+            "source_field": "biz_ext.opentime2",
+            "source": "amap",
+            "fetched_at": "2026-10-23T02:00:00Z",
+            "timezone": "Asia/Shanghai",
+            "unknown_reason": null
+          }
+        },
+        {
+          "place_id": "p2",
+          "name": "p2",
+          "address": null,
+          "category": null,
+          "adcode": "110101",
+          "location": {
+            "longitude": 116.4,
+            "latitude": 39.9,
+            "system": "GCJ-02"
+          },
+          "source_keywords": [
+            "设计展",
+            "历史街区",
+            "咖啡店",
+            "北京特色美食",
+            "独立咖啡馆",
+            "设计",
+            "步行街",
+            "博物馆",
+            "历史",
+            "建筑"
+          ],
+          "opening_hours": {
+            "status": "unknown",
+            "weekly": [],
+            "source_text": null,
+            "source_field": null,
+            "source": "not_provided",
+            "fetched_at": null,
+            "timezone": "Asia/Shanghai",
+            "unknown_reason": "not_provided"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "request": {
+            "city": {
+              "name": "北京市",
+              "adcode": "110000"
+            },
+            "origin": {
+              "place_id": "p1",
+              "name": "p1",
+              "address": null,
+              "category": null,
+              "adcode": "110101",
+              "location": {
+                "longitude": 116.4,
+                "latitude": 39.9,
+                "system": "GCJ-02"
+              },
+              "source_keywords": [
+                "设计展",
+                "历史街区",
+                "咖啡店",
+                "北京特色美食",
+                "独立咖啡馆",
+                "设计",
+                "步行街",
+                "博物馆",
+                "历史",
+                "建筑"
+              ],
+              "opening_hours": {
+                "status": "known",
+                "weekly": [
+                  {
+                    "weekday": 0,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 1,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 2,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 3,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 4,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 5,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 6,
+                    "status": "closed",
+                    "intervals": []
+                  }
+                ],
+                "source_text": "永久停业",
+                "source_field": "biz_ext.opentime2",
+                "source": "amap",
+                "fetched_at": "2026-10-23T02:00:00Z",
+                "timezone": "Asia/Shanghai",
+                "unknown_reason": null
+              }
+            },
+            "destination": {
+              "place_id": "p2",
+              "name": "p2",
+              "address": null,
+              "category": null,
+              "adcode": "110101",
+              "location": {
+                "longitude": 116.4,
+                "latitude": 39.9,
+                "system": "GCJ-02"
+              },
+              "source_keywords": [
+                "设计展",
+                "历史街区",
+                "咖啡店",
+                "北京特色美食",
+                "独立咖啡馆",
+                "设计",
+                "步行街",
+                "博物馆",
+                "历史",
+                "建筑"
+              ],
+              "opening_hours": {
+                "status": "unknown",
+                "weekly": [],
+                "source_text": null,
+                "source_field": null,
+                "source": "not_provided",
+                "fetched_at": null,
+                "timezone": "Asia/Shanghai",
+                "unknown_reason": "not_provided"
+              }
+            },
+            "mode": "walking"
+          },
+          "origin_place_id": "p1",
+          "destination_place_id": "p2",
+          "mode": "walking",
+          "status": "ok",
+          "distance_m": 1200,
+          "duration_s": 300,
+          "source": "amap",
+          "source_url": "https://restapi.amap.com/v3/direction/walking",
+          "walking_distance_m": null,
+          "transfer_count": null,
+          "unknown_reason": null,
+          "fetched_at": "2026-10-26T07:26:29.291166Z"
+        },
+        {
+          "request": {
+            "city": {
+              "name": "北京市",
+              "adcode": "110000"
+            },
+            "origin": {
+              "place_id": "p2",
+              "name": "p2",
+              "address": null,
+              "category": null,
+              "adcode": "110101",
+              "location": {
+                "longitude": 116.4,
+                "latitude": 39.9,
+                "system": "GCJ-02"
+              },
+              "source_keywords": [
+                "设计展",
+                "历史街区",
+                "咖啡店",
+                "北京特色美食",
+                "独立咖啡馆",
+                "设计",
+                "步行街",
+                "博物馆",
+                "历史",
+                "建筑"
+              ],
+              "opening_hours": {
+                "status": "unknown",
+                "weekly": [],
+                "source_text": null,
+                "source_field": null,
+                "source": "not_provided",
+                "fetched_at": null,
+                "timezone": "Asia/Shanghai",
+                "unknown_reason": "not_provided"
+              }
+            },
+            "destination": {
+              "place_id": "p1",
+              "name": "p1",
+              "address": null,
+              "category": null,
+              "adcode": "110101",
+              "location": {
+                "longitude": 116.4,
+                "latitude": 39.9,
+                "system": "GCJ-02"
+              },
+              "source_keywords": [
+                "设计展",
+                "历史街区",
+                "咖啡店",
+                "北京特色美食",
+                "独立咖啡馆",
+                "设计",
+                "步行街",
+                "博物馆",
+                "历史",
+                "建筑"
+              ],
+              "opening_hours": {
+                "status": "known",
+                "weekly": [
+                  {
+                    "weekday": 0,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 1,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 2,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 3,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 4,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 5,
+                    "status": "closed",
+                    "intervals": []
+                  },
+                  {
+                    "weekday": 6,
+                    "status": "closed",
+                    "intervals": []
+                  }
+                ],
+                "source_text": "永久停业",
+                "source_field": "biz_ext.opentime2",
+                "source": "amap",
+                "fetched_at": "2026-10-23T02:00:00Z",
+                "timezone": "Asia/Shanghai",
+                "unknown_reason": null
+              }
+            },
+            "mode": "walking"
+          },
+          "origin_place_id": "p2",
+          "destination_place_id": "p1",
+          "mode": "walking",
+          "status": "ok",
+          "distance_m": 1200,
+          "duration_s": 300,
+          "source": "amap",
+          "source_url": "https://restapi.amap.com/v3/direction/walking",
+          "walking_distance_m": null,
+          "transfer_count": null,
+          "unknown_reason": null,
+          "fetched_at": "2026-10-26T07:26:29.291192Z"
+        }
+      ],
+      "opening_checks": [],
+      "retrieval_queries": [],
+      "unqueried_keywords": [],
+      "source": "amap"
+    },
+    "draft": {
+      "trip_id": "trip_tokyo_alex_bella_slow",
+      "summary": "按明确偏好放慢节奏。",
+      "days": [
+        {
+          "date": "2026-11-10",
+          "theme": "慢节奏城市探索",
+          "activities": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        },
+        {
+          "date": "2026-11-11",
+          "theme": "慢节奏城市探索",
+          "activities": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        },
+        {
+          "date": "2026-11-12",
+          "theme": "慢节奏城市探索",
+          "activities": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "closed_poi",
+      "expected_type": "closed",
+      "patch": {
+        "trip_id": null,
+        "summary": "按明确偏好放慢节奏。",
+        "days": [
+          {
+            "day_index": 0,
+            "replacement": {
+              "date": "2026-11-10",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p2"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 1,
+            "replacement": {
+              "date": "2026-11-11",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p2"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 2,
+            "replacement": {
+              "date": "2026-11-12",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p2"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "changes": []
+    },
+    {
+      "name": "required_missing",
+      "expected_type": "required_missing",
+      "patch": {
+        "trip_id": null,
+        "summary": "按明确偏好放慢节奏。",
+        "days": [
+          {
+            "day_index": 0,
+            "replacement": {
+              "date": "2026-11-10",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "滑雪体验",
+                  "description": "本次明确要求的滑雪安排，实际条件待核实",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "path": [
+            "context",
+            "trip",
+            "context",
+            "required_activities"
+          ],
+          "value": [
+            "滑雪"
+          ]
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        }
+      ]
+    },
+    {
+      "name": "excluded_activity",
+      "expected_type": "excluded_activity",
+      "patch": {
+        "trip_id": null,
+        "summary": "按明确偏好放慢节奏。",
+        "days": [
+          {
+            "day_index": 0,
+            "replacement": {
+              "date": "2026-11-10",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "城市自由休息",
+                  "description": "通用休息，不含排除活动",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": null
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 1,
+            "replacement": {
+              "date": "2026-11-11",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "城市自由休息",
+                  "description": "通用休息，不含排除活动",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": null
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 2,
+            "replacement": {
+              "date": "2026-11-12",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "城市自由休息",
+                  "description": "通用休息，不含排除活动",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": null
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "path": [
+            "context",
+            "trip",
+            "context",
+            "excluded_activities"
+          ],
+          "value": [
+            "展览"
+          ]
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        }
+      ]
+    },
+    {
+      "name": "candidate_hallucination",
+      "expected_type": "candidate_outside",
+      "patch": {
+        "trip_id": null,
+        "summary": "按明确偏好放慢节奏。",
+        "days": [
+          {
+            "day_index": 0,
+            "replacement": {
+              "date": "2026-11-10",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 1,
+            "replacement": {
+              "date": "2026-11-11",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 2,
+            "replacement": {
+              "date": "2026-11-12",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            0,
+            "activities",
+            0,
+            "place_id"
+          ],
+          "value": "fake"
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            1,
+            "activities",
+            0,
+            "place_id"
+          ],
+          "value": "fake"
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            2,
+            "activities",
+            0,
+            "place_id"
+          ],
+          "value": "fake"
+        }
+      ]
+    },
+    {
+      "name": "route_mode_hallucination",
+      "expected_type": "route_fact",
+      "patch": {
+        "trip_id": null,
+        "summary": "按明确偏好放慢节奏。",
+        "days": [
+          {
+            "day_index": 0,
+            "replacement": {
+              "date": "2026-11-10",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 1,
+            "replacement": {
+              "date": "2026-11-11",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 2,
+            "replacement": {
+              "date": "2026-11-12",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes"
+          ],
+          "value": [
+            {
+              "request": {
+                "city": {
+                  "name": "北京市",
+                  "adcode": "110000"
+                },
+                "origin": {
+                  "place_id": "p1",
+                  "name": "p1",
+                  "address": null,
+                  "category": null,
+                  "adcode": "110101",
+                  "location": {
+                    "longitude": 116.4,
+                    "latitude": 39.9,
+                    "system": "GCJ-02"
+                  },
+                  "source_keywords": [
+                    "设计展",
+                    "历史街区",
+                    "咖啡店",
+                    "北京特色美食",
+                    "独立咖啡馆",
+                    "设计",
+                    "步行街",
+                    "博物馆",
+                    "历史",
+                    "建筑"
+                  ],
+                  "opening_hours": {
+                    "status": "unknown",
+                    "weekly": [],
+                    "source_text": null,
+                    "source_field": null,
+                    "source": "not_provided",
+                    "fetched_at": null,
+                    "timezone": "Asia/Shanghai",
+                    "unknown_reason": "not_provided"
+                  }
+                },
+                "destination": {
+                  "place_id": "p2",
+                  "name": "p2",
+                  "address": null,
+                  "category": null,
+                  "adcode": "110101",
+                  "location": {
+                    "longitude": 116.4,
+                    "latitude": 39.9,
+                    "system": "GCJ-02"
+                  },
+                  "source_keywords": [
+                    "设计展",
+                    "历史街区",
+                    "咖啡店",
+                    "北京特色美食",
+                    "独立咖啡馆",
+                    "设计",
+                    "步行街",
+                    "博物馆",
+                    "历史",
+                    "建筑"
+                  ],
+                  "opening_hours": {
+                    "status": "unknown",
+                    "weekly": [],
+                    "source_text": null,
+                    "source_field": null,
+                    "source": "not_provided",
+                    "fetched_at": null,
+                    "timezone": "Asia/Shanghai",
+                    "unknown_reason": "not_provided"
+                  }
+                },
+                "mode": "driving"
+              },
+              "origin_place_id": "p1",
+              "destination_place_id": "p2",
+              "mode": "driving",
+              "status": "ok",
+              "distance_m": 1200,
+              "duration_s": 300,
+              "source": "amap",
+              "source_url": "https://restapi.amap.com/v3/direction/driving",
+              "walking_distance_m": null,
+              "transfer_count": null,
+              "unknown_reason": null,
+              "fetched_at": "2026-10-26T07:26:29.290470Z"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            0,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "evening",
+              "title": "设计展览",
+              "description": "步行5分钟",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            1,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "evening",
+              "title": "设计展览",
+              "description": "步行5分钟",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            2,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "evening",
+              "title": "设计展览",
+              "description": "步行5分钟",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "no_route_misuse",
+      "expected_type": "route_fact",
+      "patch": {
+        "trip_id": null,
+        "summary": "按明确偏好放慢节奏。",
+        "days": [
+          {
+            "day_index": 0,
+            "replacement": {
+              "date": "2026-11-10",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 1,
+            "replacement": {
+              "date": "2026-11-11",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          },
+          {
+            "day_index": 2,
+            "replacement": {
+              "date": "2026-11-12",
+              "theme": "慢节奏城市探索",
+              "activities": [
+                {
+                  "time_period": "afternoon",
+                  "title": "设计展览",
+                  "description": "安排一段展览时间，实际信息需核实。",
+                  "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+                  "route_from_previous": null,
+                  "route_note": null,
+                  "opening_status": null,
+                  "opening_note": null,
+                  "place_id": "p1"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes"
+          ],
+          "value": [
+            {
+              "request": {
+                "city": {
+                  "name": "北京市",
+                  "adcode": "110000"
+                },
+                "origin": {
+                  "place_id": "p1",
+                  "name": "p1",
+                  "address": null,
+                  "category": null,
+                  "adcode": "110101",
+                  "location": {
+                    "longitude": 116.4,
+                    "latitude": 39.9,
+                    "system": "GCJ-02"
+                  },
+                  "source_keywords": [
+                    "设计展",
+                    "历史街区",
+                    "咖啡店",
+                    "北京特色美食",
+                    "独立咖啡馆",
+                    "设计",
+                    "步行街",
+                    "博物馆",
+                    "历史",
+                    "建筑"
+                  ],
+                  "opening_hours": {
+                    "status": "unknown",
+                    "weekly": [],
+                    "source_text": null,
+                    "source_field": null,
+                    "source": "not_provided",
+                    "fetched_at": null,
+                    "timezone": "Asia/Shanghai",
+                    "unknown_reason": "not_provided"
+                  }
+                },
+                "destination": {
+                  "place_id": "p2",
+                  "name": "p2",
+                  "address": null,
+                  "category": null,
+                  "adcode": "110101",
+                  "location": {
+                    "longitude": 116.4,
+                    "latitude": 39.9,
+                    "system": "GCJ-02"
+                  },
+                  "source_keywords": [
+                    "设计展",
+                    "历史街区",
+                    "咖啡店",
+                    "北京特色美食",
+                    "独立咖啡馆",
+                    "设计",
+                    "步行街",
+                    "博物馆",
+                    "历史",
+                    "建筑"
+                  ],
+                  "opening_hours": {
+                    "status": "unknown",
+                    "weekly": [],
+                    "source_text": null,
+                    "source_field": null,
+                    "source": "not_provided",
+                    "fetched_at": null,
+                    "timezone": "Asia/Shanghai",
+                    "unknown_reason": "not_provided"
+                  }
+                },
+                "mode": "driving"
+              },
+              "origin_place_id": "p1",
+              "destination_place_id": "p2",
+              "mode": "driving",
+              "status": "no_route",
+              "distance_m": null,
+              "duration_s": null,
+              "source": "amap",
+              "source_url": "https://restapi.amap.com/v3/direction/driving",
+              "walking_distance_m": null,
+              "transfer_count": null,
+              "unknown_reason": null,
+              "fetched_at": "2026-10-26T07:26:29.290470Z"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            0,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "evening",
+              "title": "设计展览",
+              "description": "已验证路线可达",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            1,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "evening",
+              "title": "设计展览",
+              "description": "已验证路线可达",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            2,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "evening",
+              "title": "设计展览",
+              "description": "已验证路线可达",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fast_too_sparse",
+      "expected_type": "pace_density",
+      "patch": {
+        "days": []
+      },
+      "changes": [
+        {
+          "path": [
+            "context",
+            "trip",
+            "context",
+            "preferred_pace"
+          ],
+          "value": "fast"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "draft",
+            "summary"
+          ],
+          "value": "紧凑行程"
+        }
+      ]
+    },
+    {
+      "name": "slow_too_dense",
+      "expected_type": "pace_density",
+      "patch": {
+        "days": []
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            0,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            1,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            2,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "duplicate_restaurant",
+      "expected_type": "meal_repetition",
+      "patch": {
+        "days": []
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "category"
+          ],
+          "value": "餐饮服务"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "category"
+          ],
+          "value": "餐饮服务"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "category"
+          ],
+          "value": "餐饮服务"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        }
+      ]
+    },
+    {
+      "name": "excessive_backtracking",
+      "expected_type": "backtracking",
+      "patch": {
+        "days": []
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            1,
+            "location",
+            "longitude"
+          ],
+          "value": 116.5
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "destination",
+            "location",
+            "longitude"
+          ],
+          "value": 116.5
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "origin",
+            "location",
+            "longitude"
+          ],
+          "value": 116.5
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "draft",
+            "days",
+            0,
+            "activities"
+          ],
+          "value": [
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p2"
+            },
+            {
+              "time_period": "afternoon",
+              "title": "设计展览",
+              "description": "安排一段展览时间，实际信息需核实。",
+              "rationale": "符合个人设计兴趣及明确共同看展偏好。",
+              "route_from_previous": null,
+              "route_note": null,
+              "opening_status": null,
+              "opening_note": null,
+              "place_id": "p1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "successful_local_repair",
+      "expected_type": "trip_id",
+      "patch": {
+        "trip_id": "trip_tokyo_alex_bella_slow",
+        "summary": "按明确偏好放慢节奏。",
+        "days": []
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "draft",
+            "trip_id"
+          ],
+          "value": "wrong"
+        }
+      ]
+    },
+    {
+      "name": "unresolved_after_limit",
+      "expected_type": "trip_id",
+      "patch": {
+        "days": []
+      },
+      "changes": [
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "places",
+            0,
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            0,
+            "request",
+            "origin",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "status"
+          ],
+          "value": "unknown"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "weekly"
+          ],
+          "value": []
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_text"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source_field"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "source"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "fetched_at"
+          ],
+          "value": null
+        },
+        {
+          "path": [
+            "observation",
+            "routes",
+            1,
+            "request",
+            "destination",
+            "opening_hours",
+            "unknown_reason"
+          ],
+          "value": "not_provided"
+        },
+        {
+          "path": [
+            "draft",
+            "trip_id"
+          ],
+          "value": "wrong"
+        }
+      ]
+    }
+  ]
+}

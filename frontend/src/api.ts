@@ -140,7 +140,12 @@ export type Itinerary = {
     }[];
   }[];
 };
-export type PlanningResult = { itinerary: Itinerary; notice: string };
+export type PlanningResult = {
+  itinerary: Itinerary; notice: string;
+  final_status?: "valid" | "unresolved";
+  unresolved_constraints?: { issue_id: string; type: string; message: string }[];
+  memory_provenance?: { memory_id: string; memory_type: string; score: number }[];
+};
 
 export async function planningApi(id: string): Promise<PlanningResult> {
   const result = await api<PlanningResult>(
@@ -149,7 +154,7 @@ export async function planningApi(id: string): Promise<PlanningResult> {
   );
   if (
     !result?.itinerary ||
-    result.itinerary.trip_id !== id ||
+    (result.itinerary.trip_id !== id && result.final_status !== "unresolved") ||
     typeof result.itinerary.summary !== "string" ||
     !Array.isArray(result.itinerary.days) ||
     !result.itinerary.days.length ||

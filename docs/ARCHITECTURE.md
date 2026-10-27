@@ -4,7 +4,7 @@ Last updated: 2026-10-23
 
 ## Current Architecture｜当前实现
 
-V0 本地 Web 闭环已收尾；V1已基本完成并收尾，新增可启用的大陆高德工具路径；V2尚未开始。不是生产部署，也不是推荐质量已完成验收。
+V0 本地 Web 闭环已收尾；V1已基本完成并收尾，新增可启用的大陆高德工具路径；V2首版另见下文（2026-10-26授权）。不是生产部署，也不是推荐质量已完成验收。
 
 ```text
 React / Vite / TypeScript
@@ -175,3 +175,51 @@ RouteRequest按walking/transit/driving分派高德v3接口；RouteResult输出�
 ## V1收尾验证边界
 
 Owner于2026-10-23确认V1基本完成。真实浏览器已通过原Planning API生成北京4天行程，营业文案误判修复后再次成功；真实步行smoke已通过。公交独立真实成功记录和重复质量验收仍缺失，不能把Web成功视为所有候选/路线/未来事实已验证。功能架构保持确定性Python，不自动进入V2。
+
+## Current Architecture｜V2 LangGraph单Agent（2026-10-26）
+
+`application/agent_planning.py`定义真实StateGraph，START→agent，条件边到tools或finalize，tools→agent，finalize→END；无外层手写Tool Loop、checkpoint或跨请求状态。State是TypedDict，context包含Trip/TripContext/实际参与者/相关关系，另存trip_id、city、规范化messages、searches/places/opening_checks/routes、预算计数、history、used_tool_arguments缓存、ready/stop_reason和安全错误分类。客户端/SQLite连接不入State。
+
+`schemas/agent.py`包含参数/决定/预算/指标；`llm/agent.py`是Provider-independent接口。既有DeepSeek Client新增decide，使用Responses原生function_call/function_call_output，reasoning=none，不保存或展示隐藏推理；每轮重发有上限的消息历史。单独JSON结束标志ready_to_plan=true交给图路由，最终行程仍由原Planning生成。
+
+工具入口在application/agent_tools.py；LLM只选search_places、get_walking_route、get_transit_route、get_driving_route。统一Pydantic严格参数校验、固定城市与候选ID验证，调用既有PlaceTools；规范化输出区分ok/no_result/no_route/unknown/error。营业信息随POI返回，不新增营业HTTP。排除项正向查询拦截、候选结果做有限文本/别名过滤，不是V3完整语义Validator。
+
+预算集中在AgentBudget：总Tool尝试12（含重复/非法）、真实search6、route6且每模式3、搜索limit2、候选12、LLM决策8、连续重复阈值2、recursion22。额外至多一次城市范围确认；相同规范化工具/参数命中缓存（含失败），不重复发HTTP。超限进入finalize；无真实候选则明确失败。recursion异常安全停止，不在图外偷偷补一次规划。
+
+finalize复用run_planning与V1候选/营业/路线/日期/节奏守卫，不自动Replan。失败可附安全AgentRunMetrics给smoke诊断。HTTP端点与PlanningResponse不变；metrics.agent_run保存脱敏JSON字符串，默认隐藏、debug=true可查看。工具日志只记允许工具名、参数长度/已验证POI ID、状态/时延/次数，无任意搜索词、Key、完整Prompt或原始回复；决策调用模型/token/时延为实际Provider值。LangSmith tracing_context(enabled=False)防止开发机环境配置意外上传状态。
+
+API按mode选择v0/amap/agent，默认值不变；现有SQLite表与前端不变。独立evaluation/agent_smoke.py使用固定虚构场景，不读正式库、不新增质量评分器。详见[V2_AGENT](V2_AGENT.md)。
+
+## Current Architecture｜V3 / V4（取代上文V2历史阶段限制）
+
+```text
+Feedback → 显式候选 → 稳定过滤 → 去重/覆盖 → Embedding → SQLite memories
+Trip + 当前参与者/相关关系 → scope filter → semantic retrieval/rerank → Top5
+→ LangGraph retrieve_memory → agent ⇄ tools → finalize_draft → validate
+→ 无硬冲突complete；有硬冲突replan→validate（最多2轮）→ valid/unresolved
+```
+
+LangGraph只编排，Pydantic管理草稿/问题/补丁/Memory契约，普通Python校验硬软规则与局部修改范围。旧Itinerary日期严格规则保留，DraftItinerary允许日期冲突用于诊断。v0/amap不启用新图；agent显式VALIDATION开关，memory始终新图。
+
+V4新增独立SQLite memories表，以JSON存向量，应用层精确余弦；先人物/关系组合/目的地scope过滤，再最多200条active候选与TopK=5。独立Embedding Protocol，生产兼容HTTP，测试fake；不复用DeepSeek密钥。图State只保留检索子集，连接/客户端不入State。当前Trip明确需求优先，inferred不进入硬约束。
+
+反馈是Web记忆写入口，Trip/Interview未做自动全量学习。新Planning响应包含ValidationResult、未解决约束与召回来源；前端只增反馈/草稿警示。默认日志无记忆正文、完整Prompt、Key或隐藏推理。未新增V3/V4外部依赖。详细规则/Schema与限制见[V3](V3_CONSTRAINTS.md)、[V4](V4_MEMORY.md)。
+
+## Current Architecture｜V4 Runtime Harness
+
+本节取代上文各历史阶段中“预算/缓存/运行错误放在Graph State”的描述，业务图节点和领域职责不变。
+
+```text
+FastAPI → AgentHarness.run
+  RunContext / Policy / Hooks / Trace / Budget / Error-Recovery
+→ LangGraph：retrieve_memory → agent ⇄ tools → finalize_draft → validate ⇄ replan → complete
+→ Domain / AMap / SQLite / Embedding / LLM
+```
+
+LangGraph = orchestration layer；Harness = runtime control layer。Graph State只放业务上下文和证据/行程；计数、缓存、stop reason、运行错误和trace迁到每次独立的Harness。节点共享闭包注入，不在State里保存Harness/数据库连接。
+
+`harness/policy.py`统一工具/决策/修复/TopK/recursion默认值，AgentBudget和旧常量只是兼容引用；领域城市/POI/Schema守卫留在原层。默认no-op hooks只拿脱敏快照，普通失败隔离，critical显式终止。统一事件保留旧debug投影，默认API/前端不变。新增11例behavioral harness与离线smoke，无新依赖、外部SaaS、业务Tool或V5。详见[AGENT_HARNESS](AGENT_HARNESS.md)。
+
+## 本地配置与验收补充（2026-10-27）
+
+本机选择memory模式，长期记忆及RAG检索已实现；向量服务选择硅基流动BAAI/bge-m3，生成模型仍走DeepSeek官方接口，架构未改动。真实向量调用/Web写入通过、Owner确认检索完成；具体证据和当前事实表达缺口以[CURRENT_STATUS](CURRENT_STATUS.md)为准。模式切换不切换数据库或复制代码，见[LOCAL_DEMO](LOCAL_DEMO.md)。

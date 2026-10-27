@@ -2,7 +2,7 @@
 
 一个结合“我是谁、和谁出发、这次想要什么”的个性化 AI 旅行原型。
 
-**当前状态：V0 已收尾，V1 已基本完成并进入收尾，V2 尚未开始（2026-10-23）。** 已可在 Web 完成人物资料、同行关系、旅行创建、真实 AI 访谈和结构化行程生成。推荐质量仍有已知缺口；本次收尾不代表已证明个性化显著优于普通攻略，也不是生产发布。
+**当前状态：V0/V1 保留，V2 LangGraph、V3 有限约束修复、V4 Memory/RAG 本地原型已实现（更新至2026-10-27）；验证结果与限制见 CURRENT_STATUS。** 已可在 Web 完成人物资料、同行关系、旅行创建、真实 AI 访谈和结构化行程生成。推荐质量仍有已知缺口；本次收尾不代表已证明个性化显著优于普通攻略，也不是生产发布。
 
 ## 已实现的体验
 
@@ -26,15 +26,15 @@ python3 -m venv .venv
 终端 A（项目根目录）启动后端：
 
 ```bash
-PYTHONPATH=src .venv/bin/python -m uvicorn life_journey.api:app --host 127.0.0.1 --port 8000
+.venv/bin/python -m uvicorn life_journey.api:app --app-dir src --host 127.0.0.1 --port 8000
 ```
 
 终端 B 启动前端：
 
 ```bash
 cd frontend
-npm ci
-npm run dev
+npm ci  # 首次安装或依赖锁文件变化时执行
+npm run dev -- --strictPort
 ```
 
 打开 [本地前端](http://127.0.0.1:5173/)。开发代理把 `/api` 转发到 8000，后端仅允许本地 5173 的 CORS。API 文档为 [本地 Swagger](http://127.0.0.1:8000/docs)。这些是本地开发方式，尚无部署配置。
@@ -64,7 +64,7 @@ deterministic ready → 用户点击 → Planning Prompt → LLM → Itinerary �
 
 ## 验证与已知限制
 
-最新功能验证：**800 项 pytest 通过**，1 项既有第三方弃用提示；前端 TypeScript/Vite build 通过。普通测试离线，不调用 DeepSeek：
+最新功能验证数量见[当前状态](docs/CURRENT_STATUS.md)；前端 TypeScript/Vite build 通过。普通测试离线，不调用 DeepSeek：
 
 ```bash
 .venv/bin/python -m pytest -q
@@ -81,7 +81,7 @@ PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.interview --include-d
 
 最新已保存报告为 `evaluations/interview_v0_gender_context.json`，7/8（87.5%）；失败例仍有中英文活动标签不一致，历史运行还出现过排除范围扩大。评分含词汇启发式，不能证明不存在语义推断。真实规划曾以虚构输入通过 3 天/9 活动的结构与日期校验，不代表推荐事实或质量已充分验证。详见 [Evaluation](evaluations/README.md)。
 
-V0 兼容模式仍不调用地图；V1 可启用高德地点/驾车工具，详见下节。未实现：价格查询、完整可执行性和费用验证、行程质量对比评分、行程持久化/修改、聊天历史持久化、登录、部署、长期 Memory、Multi-Agent。当前没有删除/主体换绑/通用 Trip 修改 UI 或接口。常规 Person/Relationship 更新是完整替换，不是 PATCH；预算尚未明确人均/全组等口径。
+V0 兼容模式仍不调用地图；V1 可启用高德地点/驾车工具，详见下节。未实现：价格查询、完整可执行性和费用验证、行程质量对比评分、行程持久化/修改、聊天历史持久化、登录、部署、Multi-Agent。当前没有删除/主体换绑/通用 Trip 修改 UI 或接口。常规 Person/Relationship 更新是完整替换，不是 PATCH；预算尚未明确人均/全组等口径。
 
 ## 项目结构与文档
 
@@ -130,10 +130,59 @@ PYTHONPATH=src .venv/bin/python -m life_journey.tools.smoke --city 北京 --orig
 PYTHONPATH=src .venv/bin/python -m life_journey.tools.smoke --city 北京 --origin 故宫博物院 --destination 景山公园 --mode transit
 ```
 
-`--mode driving` 保留，默认 walking。真实驾车、步行和北京4天 Web 规划已有成功记录；独立真实 transit 验收、重复成功率与推荐质量尚待补证据。最近完整离线测试852项通过，1项既有弃用提示。POI存在不等于未来营业或活动必然可行，路线不是未来班次/交通保证；没有价格、天气、酒店、航班、Memory 或自动 Replanning。
+`--mode driving` 保留，默认 walking。真实驾车、步行和北京4天 Web 规划已有成功记录；独立真实 transit 验收、重复成功率与推荐质量尚待补证据。最近完整离线测试852项通过，1项既有弃用提示。POI存在不等于未来营业或活动必然可行，路线不是未来班次/交通保证；V1兼容路径没有价格、天气、酒店、航班、Memory 或自动 Replanning；后续V3/V4见下节。
 
-详见 [当前状态](docs/CURRENT_STATUS.md) 与 [V1工具契约](docs/V1_TOOLS.md)。V1 功能收尾不等于推荐质量已完成验收；V2未开始，不自动扩展范围。
+详见 [当前状态](docs/CURRENT_STATUS.md) 与 [V1工具契约](docs/V1_TOOLS.md)。V1 功能收尾不等于推荐质量已完成验收；V2为另行授权的新模式，V1仍保留原行为。
 
 ## English summary
 
-Life Journey is a local personalized travel prototype with persistent profiles, relationships, trips and interview state. V1 now adds bounded Amap POI retrieval, conservative opening-hours checks and walking/transit route observations to a deterministic Python planning workflow. A real four-day Beijing itinerary has been displayed through the Web flow. V1 is closing; V2 has not started. Future operating hours, transit schedules, itinerary quality and repeated success rates are not guaranteed. Chat history and generated itineraries are not persisted.
+Life Journey is a local personalized travel prototype with persistent profiles, relationships, trips and interview state. V1 now adds bounded Amap POI retrieval, conservative opening-hours checks and walking/transit route observations to a deterministic Python planning workflow. A real four-day Beijing itinerary has been displayed through the Web flow. V1 is closing; V2 is now available as an opt-in LangGraph tool-selection mode. Future operating hours, transit schedules, itinerary quality and repeated success rates are not guaranteed. Chat history and generated itineraries are not persisted.
+
+## V2：LangGraph单Agent（可选模式）
+
+根目录.env设置`LIFE_JOURNEY_PLANNING_MODE=agent`并重启后端，仍调用原`POST /api/trips/{trip_id}/planning`。`v0`保留模型知识模式，`amap`保留V1固定Python检索；三种模式显式切换，不自动fallback。API顶层仍是itinerary/notice/observation/metrics，前端无需修改。
+
+V2由LangGraph编排`agent → tools → agent → finalize`：DeepSeek原生function calling决定搜索词、已查候选之间的路线模式和何时停止；Python控制参数/大陆同城范围/预算/去重，最终复用V1 Planning与全部事实守卫。LangGraph不替代领域模型、高德适配器、SQLite或Pydantic。此V2兼容路径不包含V3/Memory；后续V3/V4按显式模式启用，仍无多Agent、Streaming或Checkpoint。
+
+新增直接依赖langgraph（当前验证版本1.2.17），安装方式仍为`.venv/bin/python -m pip install -e ".[dev]"`；其传递依赖包括langchain-core/langsmith，但不使用LangChain高层Agent，也不自动开启LangSmith上传。默认最多12次Tool尝试、6次搜索/6次路线、每路线模式3次、12候选、8次模型决策；连续重复2次强制停止，recursion_limit=22。详见[V2说明](docs/V2_AGENT.md)。
+
+固定虚构输入的真实smoke（会消耗高德与DeepSeek配额，不访问SQLite）：
+
+```bash
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.agent_smoke --city 北京 --max-tool-calls 4
+```
+
+输出脱敏行动顺序、状态、预算/停止原因与最终行程。错误或无证据不会伪造行程；最终模型违反既有营业/路线/节奏守卫仍可能失败，不自动重新规划。Agent指标在API `?debug=true`的metrics.agent_run JSON字符串中；默认不返回指标。
+
+## V3 / V4 面试原型
+
+V1固定工具→V2自主取证→V3确定性校验/最多两轮局部修复→V4按人物/关系/旅行隔离的Memory RAG。保留旧模式，不自动跨模式回退。`agent`设置`LIFE_JOURNEY_VALIDATION=1`启用V3；`memory`始终包含RAG及V3。Memory仅参考，不覆盖当前Trip明确需求；未解决约束返回带警示的草稿。
+
+`POST /api/trips/{trip_id}/feedback`仅保存明确长期偏好，前端有最小反馈表单；临时反馈不写长期记忆。使用SQLite存向量，无新增V3/V4依赖。memory需在根目录.env另配`LIFE_JOURNEY_EMBEDDING_URL`、`LIFE_JOURNEY_EMBEDDING_MODEL`、`LIFE_JOURNEY_EMBEDDING_KEY`，端点采用兼容embeddings协议；`.env.example`只有占位。没有Embedding配置时明确报错，不生成假向量。
+
+```bash
+.venv/bin/pytest -q
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.constraints
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.memory_rag
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.version_smoke --stage v3 --case closed --city 北京
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.version_smoke --stage v4 --city 北京
+```
+
+普通pytest完全离线。固定评估用脚本补丁/fake向量，不代表真实模型质量；独立V3/V4 smoke入口不等于已运行验收；2026-10-27真实Embedding和Web长期偏好写入通过，Owner确认RAG检索完成，详见当前状态。完整Schema、预算、数据流与边界见[V3](docs/V3_CONSTRAINTS.md)、[V4](docs/V4_MEMORY.md)、[当前状态](docs/CURRENT_STATUS.md)。
+
+## 轻量 Agent Harness（V4工程化收口）
+
+在LangGraph之上增加轻量runtime harness，用于统一策略、预算、hooks、trace、错误处理与behavioral evaluation。**LangGraph负责orchestration，Harness负责runtime control**；原图与领域守卫保留，不进入V5。
+
+agent/memory自动使用Harness；v0/amap不受影响。默认Planning响应不变，`?debug=true`查看脱敏summary/trace。没有新依赖、外部监控或前端改版。
+
+```bash
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.harness_smoke
+PYTHONPATH=src .venv/bin/python -m life_journey.evaluation.harness_behavior --output evaluations/harness_behavior_report.json
+```
+
+两者均默认离线，使用真实LangGraph和fake依赖，不代表真实模型质量。完整运行上下文、集中Policy、hooks、计数口径、恢复策略与边界见[AGENT_HARNESS](docs/AGENT_HARNESS.md)。
+
+## 本地展示与模式切换
+
+长期记忆与RAG检索已实现；当前本机使用DeepSeek官方对话接口、硅基流动BAAI/bge-m3向量接口与高德工具。2026-10-27验证记录和已知问题见[当前状态](docs/CURRENT_STATUS.md)。三种模式、固定启动命令、网页测试与推送检查见[本地展示指南](docs/LOCAL_DEMO.md)。

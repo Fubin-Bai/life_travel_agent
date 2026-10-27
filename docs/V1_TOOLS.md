@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-23
 
-**Implemented / 基本完成并收尾。** V2尚未开始。本文描述现行实现，不保证推荐质量或现实旅行可执行性；证据汇总见 [CURRENT_STATUS](CURRENT_STATUS.md)。
+**Implemented / 基本完成并收尾。** V1保留；V2可选模式见[V2_AGENT](V2_AGENT.md)。本文描述现行实现，不保证推荐质量或现实旅行可执行性；证据汇总见 [CURRENT_STATUS](CURRENT_STATUS.md)。
 
 ## 模式与配置
 
@@ -131,4 +131,4 @@ smoke默认walking，可选driving/transit；每条最多4次高德请求，不�
 - [高德地点搜索](https://developer.amap.com/api/webservice/guide/api/search/)
 - [高德路径规划](https://developer.amap.com/api/webservice/guide/api/direction)
 
-V1为固定workflow的已实现收尾版本；下一阶段须Owner另行授权。
+V1为固定workflow的已实现收尾版本；2026-10-26另获授权的V2不改变本模式，见V2_AGENT。

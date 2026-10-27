@@ -1,0 +1,44 @@
+{
+  "kind": "offline_fake_embeddings_and_scripted_planner",
+  "case_count": 4,
+  "preference_alignment_no_memory": 0.25,
+  "preference_alignment_with_memory": 1.0,
+  "hard_violation_rate": 0.0,
+  "hard_violation_note": "固定脚本草稿经deterministic Validator检查，不代表真实LLM质量",
+  "memory_relevance": 1.0,
+  "unsupported_personalization_rate": 0.0,
+  "cases": [
+    {
+      "case": "person",
+      "no_memory_alignment": 0.0,
+      "with_memory_alignment": 1.0,
+      "retrieval_relevance": 1.0,
+      "unsupported_personalization": 0.0,
+      "hard_violation_rate": 0.0
+    },
+    {
+      "case": "relationship",
+      "no_memory_alignment": 0.0,
+      "with_memory_alignment": 1.0,
+      "retrieval_relevance": 1.0,
+      "unsupported_personalization": 0.0,
+      "hard_violation_rate": 0.0
+    },
+    {
+      "case": "trip",
+      "no_memory_alignment": 0.0,
+      "with_memory_alignment": 1.0,
+      "retrieval_relevance": 1.0,
+      "unsupported_personalization": 0.0,
+      "hard_violation_rate": 0.0
+    },
+    {
+      "case": "irrelevant_person",
+      "no_memory_alignment": 1.0,
+      "with_memory_alignment": 1.0,
+      "retrieval_relevance": 1.0,
+      "unsupported_personalization": 0.0,
+      "hard_violation_rate": 0.0
+    }
+  ]
+}

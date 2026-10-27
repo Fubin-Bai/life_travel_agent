@@ -2,6 +2,7 @@
 from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 from .itinerary import Itinerary
+from .validation import DraftItinerary, ValidationResult, ConstraintIssue
 from life_journey.tools.schemas import PlanningObservation
 
 V0_FACT_NOTICE = "V0 行程基于模型知识生成；未验证营业时间、交通、价格或实时信息，请出行前核实。"
@@ -18,7 +19,14 @@ class PlanningPrompt(BaseModel):
 class PlanningResponse(BaseModel):
     """事实边界由程序固定附带，不能依赖模型自愿声明。"""
     model_config = ConfigDict(extra="forbid", strict=True)
-    itinerary: Itinerary
+    itinerary: Itinerary | DraftItinerary
     notice: str = V0_FACT_NOTICE
     observation: PlanningObservation | None = None
     metrics: dict[str, str | int | float | None] | None = None
+
+    validation_result: ValidationResult | None = None
+    unresolved_constraints: list[ConstraintIssue] = Field(default_factory=list)
+    final_status: str | None = None
+    replan_round: int = 0
+
+    memory_provenance: list[dict[str, str | float]] = Field(default_factory=list)

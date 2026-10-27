@@ -80,6 +80,18 @@ class DeepSeekInterviewClient:
         """复用同一安全传输路径，输出契约使用 Itinerary；不复制访谈语义。"""
         return self._generate_structured(prompt, Itinerary, PlanningCallResult)
 
+    def generate_draft(self, prompt):
+        """V3草稿允许语义冲突，由独立Validator处理。"""
+        from life_journey.schemas.validation import DraftItinerary
+        from .replanning import DraftCallResult
+        return self._generate_structured(prompt, DraftItinerary, DraftCallResult)
+
+    def repair_itinerary(self, prompt):
+        """有界局部补丁，沿用安全Provider传输。"""
+        from life_journey.schemas.validation import ReplanPatch
+        from .replanning import RepairCallResult
+        return self._generate_structured(prompt, ReplanPatch, RepairCallResult)
+
     def _generate_structured(self, prompt, output_model, result_model):
         """仅共用 HTTP/JSON/指标逻辑，任务规则仍在各自 Prompt Builder 中。"""
         schema = output_model.model_json_schema(mode="validation")
@@ -142,3 +154,44 @@ class DeepSeekInterviewClient:
             )
         except ValidationError:
             raise LLMResponseError("DeepSeek 调用指标格式不合法") from None
+
+
+    def decide(self, prompt):
+        """V2原生Responses function calling；与LangGraph无直接依赖，不返回隐藏推理。"""
+        from life_journey.schemas.agent import AgentDecision, AgentToolCall, AgentReady, AgentDecisionMetrics, AGENT_DECISION_MAX_OUTPUT_TOKENS
+        from life_journey.schemas.agent import tool_definitions
+        if prompt.tools != tool_definitions():
+            raise LLMConfigurationError('Agent工具契约与当前允许工具不一致')
+        started=perf_counter()
+        try:
+            response=self._client.responses.create(
+                model=self.config.model,instructions=prompt.system_prompt,input=prompt.messages,
+                tools=prompt.tools,tool_choice='auto',reasoning={'effort':'none'},
+                text={'format':{'type':'json_schema','name':'AgentReady','schema':AgentReady.model_json_schema(mode='validation')}},
+                max_output_tokens=min(self.config.max_output_tokens,AGENT_DECISION_MAX_OUTPUT_TOKENS),stream=False,
+            )
+        except APIConnectionError:
+            raise LLMRequestError('DeepSeek Agent网络连接或超时失败；未自动重试') from None
+        except APIStatusError as exc:
+            raise LLMRequestError(f'DeepSeek Agent HTTP失败（状态码 {exc.status_code}）；未自动重试') from None
+        except APIError:
+            raise LLMRequestError('DeepSeek Agent SDK请求失败；未自动重试') from None
+        if response.status!='completed' or response.incomplete_details is not None or response.error is not None:
+            raise LLMResponseError('DeepSeek Agent响应未完成或包含错误')
+        usage=response.usage
+        metrics=AgentDecisionMetrics(model=getattr(response,'model',None),input_tokens=usage.input_tokens if usage else None,
+            output_tokens=usage.output_tokens if usage else None,total_tokens=usage.total_tokens if usage else None,
+            latency_ms=(perf_counter()-started)*1000)
+        try:
+            calls=[AgentToolCall(call_id=item.call_id,name=item.name,arguments=item.arguments)
+                   for item in (response.output or []) if item.type=='function_call']
+            if calls:
+                return AgentDecision(tool_calls=calls,call_metrics=metrics)
+            messages=[item for item in (response.output or []) if item.type=='message']
+            if len(messages)!=1 or messages[0].role!='assistant' or messages[0].status!='completed':
+                raise ValueError('missing decision')
+            text=''.join(part.text for part in (messages[0].content or []) if part.type=='output_text')
+            ready=AgentReady.model_validate_json(text)
+            return AgentDecision(ready_to_plan=ready.ready_to_plan,call_metrics=metrics)
+        except (ValueError,TypeError,AttributeError):
+            raise LLMResponseError('DeepSeek Agent没有返回合法工具调用或结构化结束决定') from None

@@ -1,0 +1,3415 @@
+{
+  "kind": "offline_behavioral_harness_real_langgraph_fake_dependencies",
+  "case_count": 11,
+  "behavior_pass_rate": 1.0,
+  "run_success_rate": 0.9090909090909091,
+  "avg_tool_calls": 1.3636363636363635,
+  "avg_model_calls": 3.727272727272727,
+  "avg_replan_rounds": 0.6363636363636364,
+  "cache_hit_rate": 0.26666666666666666,
+  "validation_failure_rate": 0.4444444444444444,
+  "unresolved_constraint_rate": 0.09090909090909091,
+  "memory_retrieval_count": 3,
+  "avg_latency_ms": 6.882685532962734,
+  "runs": [
+    {
+      "case": "tool_budget",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "normal_budget_stop": true
+      },
+      "summary": {
+        "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+        "final_status": "completed",
+        "total_duration_ms": 7.804083172231913,
+        "model_calls": 2,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 1,
+        "validation_failures": 0,
+        "replan_rounds": 0,
+        "warning_count": 1,
+        "error_count": 0,
+        "stop_reason": "tool_budget_exhausted"
+      },
+      "trace": [
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:1",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.283330Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:2",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.283344Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:3",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.283353Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.004082918167114258
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:4",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.285814Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:5",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.286767Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.9394162334501743
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:6",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.286792Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.9719589725136757
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:7",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287002Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:8",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287056Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:9",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287723Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.6623747758567333,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:10",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287792Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.7857917807996273
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:11",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287968Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:12",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287972Z",
+          "event_type": "BUDGET_REACHED",
+          "graph_node": "agent",
+          "status": "blocked",
+          "stop_reason": "tool_budget_exhausted"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:13",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.287979Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.00820821151137352
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:14",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.288137Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:15",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.289470Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3215839862823486
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:16",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.289479Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3387920334935188
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:17",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.289594Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:18",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.290658Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 1.0587498545646667,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:19",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.290666Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 1.0693329386413097
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:20",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.290828Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:21",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.290909Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:22",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.290913Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.08099991828203201
+        },
+        {
+          "event_id": "run_483493f4-1669-4221-832e-f688c98da24e:23",
+          "run_id": "run_483493f4-1669-4221-832e-f688c98da24e",
+          "timestamp": "2026-10-26T08:52:47.291010Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "tool_budget_exhausted"
+        }
+      ]
+    },
+    {
+      "case": "duplicate_stop",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "duplicate_cache_and_stop": true
+      },
+      "summary": {
+        "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+        "final_status": "completed",
+        "total_duration_ms": 6.676249671727419,
+        "model_calls": 4,
+        "tool_calls": 3,
+        "executed_tool_calls": 1,
+        "cache_hits": 2,
+        "memory_retrievals": 0,
+        "validation_passes": 1,
+        "validation_failures": 0,
+        "replan_rounds": 0,
+        "warning_count": 1,
+        "error_count": 0,
+        "stop_reason": "repeated_tool_calls"
+      },
+      "trace": [
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:1",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.291339Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:2",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.291344Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:3",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.291348Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0020829029381275177
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:4",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293015Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:5",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293415Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3931247629225254
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:6",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293429Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.40945783257484436
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:7",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293586Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:8",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293634Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:9",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293838Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.19912514835596085,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:10",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.293883Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.29412517324090004
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:11",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294000Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:12",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294389Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.38391584530472755
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:13",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294402Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.3986661322414875
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:14",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294551Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:15",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294675Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:16",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294744Z",
+          "event_type": "TOOL_CACHE_HIT",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.06433296948671341,
+          "result_count": 2,
+          "cache_hit": true
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:17",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294785Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.23187464103102684
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:18",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.294901Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:19",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295286Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3800000995397568
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:20",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295296Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.3920421004295349
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:21",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295429Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:22",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295553Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:23",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295613Z",
+          "event_type": "TOOL_CACHE_HIT",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.056416261941194534,
+          "result_count": 2,
+          "cache_hit": true
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:24",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295650Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.21816696971654892
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:25",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295760Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:26",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295764Z",
+          "event_type": "DUPLICATE_CALL_BLOCKED",
+          "graph_node": "agent",
+          "status": "blocked",
+          "stop_reason": "repeated_tool_calls"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:27",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295768Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.005125068128108978
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:28",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.295909Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:29",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297187Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.268208958208561
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:30",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297195Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.2827091850340366
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:31",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297299Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:32",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297701Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.3965422511100769,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:33",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297708Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.40616700425744057
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:34",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297850Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:35",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297919Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:36",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.297923Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.07004197686910629
+        },
+        {
+          "event_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de:37",
+          "run_id": "run_ed52193a-a435-45cd-a1f0-86bb6744e7de",
+          "timestamp": "2026-10-26T08:52:47.298014Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "repeated_tool_calls"
+        }
+      ]
+    },
+    {
+      "case": "memory_scope",
+      "planning_mode": "memory",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "scope_isolated": true
+      },
+      "summary": {
+        "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+        "final_status": "completed",
+        "total_duration_ms": 5.778208840638399,
+        "model_calls": 3,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 1,
+        "validation_passes": 1,
+        "validation_failures": 0,
+        "replan_rounds": 0,
+        "warning_count": 1,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:1",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.299731Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:2",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.299737Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:3",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.299742Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0017499551177024841
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:4",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.301531Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "retrieve_memory"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:5",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.301780Z",
+          "event_type": "MEMORY_RETRIEVED",
+          "graph_node": "retrieve_memory",
+          "duration_ms": 0.24020811542868614,
+          "result_count": 0
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:6",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.301787Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "retrieve_memory",
+          "duration_ms": 0.25187479332089424
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:7",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.301903Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:8",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302248Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.33970782533288
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:9",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302263Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.35675009712576866
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:10",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302435Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:11",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302487Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:12",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302667Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.17533265054225922,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:13",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302711Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.2725827507674694
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:14",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.302833Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:15",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.303219Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3810832276940346
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:16",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.303227Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.39116712287068367
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:17",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.303371Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:18",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.304695Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3147499412298203
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:19",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.304703Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3286247849464417
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:20",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.304815Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:21",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.305199Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.3787078894674778,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:22",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.305206Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.38741715252399445
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:23",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.305347Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:24",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.305412Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:25",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.305416Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.06620818749070168
+        },
+        {
+          "event_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b:26",
+          "run_id": "run_ca310b27-290c-4271-9e0a-413bfa823c4b",
+          "timestamp": "2026-10-26T08:52:47.305507Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "hard_replan",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "hard_triggers_replan": true
+      },
+      "summary": {
+        "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+        "final_status": "completed",
+        "total_duration_ms": 6.681583356112242,
+        "model_calls": 4,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 2,
+        "validation_failures": 1,
+        "replan_rounds": 1,
+        "warning_count": 2,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:1",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.305844Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:2",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.305849Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:3",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.305853Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0015832483768463135
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:4",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.307471Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:5",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.307861Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3847917541861534
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:6",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.307874Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.3993343561887741
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:7",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308034Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:8",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308080Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:9",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308261Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.17708400264382362,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:10",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308301Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.26454171165823936
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:11",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308415Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:12",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308795Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.37625012919306755
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:13",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308804Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.3865002654492855
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:14",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.308954Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:15",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310235Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.270540989935398
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:16",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310241Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.284207683056593
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:17",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310347Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:18",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310741Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.3887917846441269,
+          "validation_issue_count": 2,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "trip_id",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:19",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310748Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.39783306419849396
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:20",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310896Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:21",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.310904Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:22",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.311745Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.8363751694560051
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:23",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.311749Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.8413749746978283,
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:24",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.311753Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.8538332767784595
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:25",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.311856Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:26",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.312223Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.36129215732216835,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:27",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.312229Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.36899978294968605
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:28",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.312366Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:29",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.312434Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:30",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.312437Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.06791623309254646
+        },
+        {
+          "event_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c:31",
+          "run_id": "run_c6d72a8a-af36-43a9-ae25-cb89aa2ce07c",
+          "timestamp": "2026-10-26T08:52:47.312524Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "soft_stop",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "soft_does_not_force_replan": true
+      },
+      "summary": {
+        "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+        "final_status": "completed",
+        "total_duration_ms": 5.3504169918596745,
+        "model_calls": 3,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 1,
+        "validation_failures": 0,
+        "replan_rounds": 0,
+        "warning_count": 4,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:1",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.312903Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:2",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.312908Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:3",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.312913Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.002166256308555603
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:4",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.314532Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:5",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315048Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.510707963258028
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:6",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315059Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.5235830321907997
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:7",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315204Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:8",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315252Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:9",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315430Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.17362507060170174,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:10",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315472Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.26524998247623444
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:11",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315582Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:12",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315974Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.38783298805356026
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:13",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.315983Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.39783306419849396
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:14",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.316124Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:15",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.317378Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.2446660548448563
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:16",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.317384Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.2573329731822014
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:17",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.317489Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:18",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.317939Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.44516706839203835,
+          "validation_issue_count": 4,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "pace_density",
+              "severity": "soft"
+            },
+            {
+              "issue_id": "i2",
+              "type": "pace_density",
+              "severity": "soft"
+            },
+            {
+              "issue_id": "i3",
+              "type": "pace_density",
+              "severity": "soft"
+            },
+            {
+              "issue_id": "i4",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:19",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.317947Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.4547908902168274
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:20",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.318089Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:21",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.318157Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:22",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.318161Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.06954139098525047
+        },
+        {
+          "event_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e:23",
+          "run_id": "run_a3089f3b-b169-416a-8e83-2dec3def9d7e",
+          "timestamp": "2026-10-26T08:52:47.318253Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "max_replans",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "unresolved_after_max": true
+      },
+      "summary": {
+        "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+        "final_status": "unresolved",
+        "total_duration_ms": 8.080500178039074,
+        "model_calls": 5,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 3,
+        "validation_failures": 3,
+        "replan_rounds": 2,
+        "warning_count": 3,
+        "error_count": 0,
+        "stop_reason": "max_replan_rounds"
+      },
+      "trace": [
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:1",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.318580Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:2",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.318584Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:3",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.318588Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0014998950064182281
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:4",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.320188Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:5",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.320592Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.398833304643631
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:6",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.320604Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.41229184716939926
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:7",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.320754Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:8",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.320804Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:9",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.320979Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.1709582284092903,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:10",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.321019Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.26249978691339493
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:11",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.321129Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:12",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.321528Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.394958071410656
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:13",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.321536Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.40400028228759766
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:14",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.321676Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:15",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.322951Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.2654578313231468
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:16",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.322958Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.2783752754330635
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:17",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.323060Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:18",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.323440Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.3742077387869358,
+          "validation_issue_count": 2,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "trip_id",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:19",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.323446Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.38283271715044975
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:20",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.323592Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:21",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.323597Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:22",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.324424Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.823416281491518
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:23",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.324428Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.8281250484287739,
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:24",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.324432Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.8369158022105694
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:25",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.324531Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:26",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.324903Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.36804191768169403,
+          "validation_issue_count": 2,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "trip_id",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:27",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.324910Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.37579238414764404
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:28",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.325049Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:29",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.325053Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 2
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:30",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.325900Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.8432078175246716
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:31",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.325903Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.8474169299006462,
+          "replan_round": 2
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:32",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.325908Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.8561671711504459
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:33",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326006Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:34",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326373Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.36304211243987083,
+          "validation_issue_count": 2,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "trip_id",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 2
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:35",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326379Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.3703329712152481
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:36",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326418Z",
+          "event_type": "BUDGET_REACHED",
+          "status": "blocked",
+          "stop_reason": "max_replan_rounds"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:37",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326516Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:38",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326570Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "unresolved",
+          "validation_issue_count": 1
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:39",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326573Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.054167117923498154
+        },
+        {
+          "event_id": "run_43a08854-133a-4994-8641-8924d2889197:40",
+          "run_id": "run_43a08854-133a-4994-8641-8924d2889197",
+          "timestamp": "2026-10-26T08:52:47.326659Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "unresolved",
+          "stop_reason": "max_replan_rounds"
+        }
+      ]
+    },
+    {
+      "case": "closed_repair",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "closed_removed": true
+      },
+      "summary": {
+        "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+        "final_status": "completed",
+        "total_duration_ms": 6.933707743883133,
+        "model_calls": 4,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 2,
+        "validation_failures": 1,
+        "replan_rounds": 1,
+        "warning_count": 2,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:1",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.327134Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:2",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.327141Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:3",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.327148Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.002040993422269821
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:4",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.328734Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:5",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329162Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.4209168255329132
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:6",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329178Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.43949997052550316
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:7",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329344Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:8",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329392Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:9",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329612Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.21591736003756523,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:10",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329660Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.31183380633592606
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:11",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.329784Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:12",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.330185Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3951657563447952
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:13",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.330193Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.4054582677781582
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:14",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.330354Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:15",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.331674Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3088746927678585
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:16",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.331682Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.323749776929617
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:17",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.331800Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:18",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.332204Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.3989171236753464,
+          "validation_issue_count": 4,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "closed",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "closed",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i3",
+              "type": "closed",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i4",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:19",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.332213Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.4098750650882721
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:20",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.332390Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:21",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.332394Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:22",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333271Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.8730422705411911
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:23",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333275Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.8779577910900116,
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:24",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333279Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.8862079121172428
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:25",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333391Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:26",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333754Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.3581671044230461,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:27",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333760Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.36620860919356346
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:28",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333902Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:29",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333974Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:30",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.333978Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.0716671347618103
+        },
+        {
+          "event_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1:31",
+          "run_id": "run_379ae9ba-aa50-4f63-9577-1be0d1968cf1",
+          "timestamp": "2026-10-26T08:52:47.334064Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "unknown_not_verified",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "unknown_stays_unknown": true
+      },
+      "summary": {
+        "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+        "final_status": "completed",
+        "total_duration_ms": 7.221166975796223,
+        "model_calls": 4,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 2,
+        "validation_failures": 1,
+        "replan_rounds": 1,
+        "warning_count": 2,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:1",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.334457Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:2",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.334462Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:3",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.334466Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0016670674085617065
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:4",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336081Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:5",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336513Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.42683305218815804
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:6",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336528Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.4437090829014778
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:7",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336671Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:8",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336720Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:9",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336903Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.17816713079810143,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:10",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.336945Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.2709999680519104
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:11",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.337056Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:12",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.337457Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.39629125967621803
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:13",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.337466Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.4071248695254326
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:14",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.337608Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:15",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.338936Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3175001367926598
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:16",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.338943Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3312920928001404
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:17",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.339052Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:18",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.339872Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.8146660402417183,
+          "validation_issue_count": 2,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "unsupported_fact",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:19",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.339879Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.8243750780820847
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:20",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.340034Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:21",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.340039Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:22",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.340881Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.8382080122828484
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:23",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.340884Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.842707697302103,
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:24",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.340888Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.85108308121562
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:25",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.340989Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:26",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.341363Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.36795763298869133,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:27",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.341368Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.37570809945464134
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:28",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.341508Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:29",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.341582Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:30",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.341587Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.07545808330178261
+        },
+        {
+          "event_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7:31",
+          "run_id": "run_58709307-5cb6-477c-9974-b36e44b38ab7",
+          "timestamp": "2026-10-26T08:52:47.341677Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "current_trip_over_memory",
+      "planning_mode": "memory",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "current_trip_overrides": true
+      },
+      "summary": {
+        "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+        "final_status": "completed",
+        "total_duration_ms": 5.946457851678133,
+        "model_calls": 3,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 1,
+        "validation_passes": 1,
+        "validation_failures": 0,
+        "replan_rounds": 0,
+        "warning_count": 4,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:1",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.343170Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:2",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.343176Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:3",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.343182Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0019171275198459625
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:4",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.344993Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "retrieve_memory"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:5",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.345143Z",
+          "event_type": "MEMORY_RETRIEVED",
+          "graph_node": "retrieve_memory",
+          "duration_ms": 0.14404207468032837,
+          "result_count": 0
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:6",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.345148Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "retrieve_memory",
+          "duration_ms": 0.1515410840511322
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:7",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.345247Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:8",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.345812Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.33016595989465714
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:9",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.345824Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.5740406922996044
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:10",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.345977Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:11",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346027Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:12",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346202Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.1709158532321453,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:13",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346242Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.26233308017253876
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:14",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346356Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:15",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346757Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3964579664170742
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:16",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346766Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.40666665881872177
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:17",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.346917Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:18",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.348273Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3466249220073223
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:19",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.348280Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3597500510513783
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:20",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.348387Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:21",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.348804Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.41174981743097305,
+          "validation_issue_count": 4,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "pace_density",
+              "severity": "soft"
+            },
+            {
+              "issue_id": "i2",
+              "type": "pace_density",
+              "severity": "soft"
+            },
+            {
+              "issue_id": "i3",
+              "type": "pace_density",
+              "severity": "soft"
+            },
+            {
+              "issue_id": "i4",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:22",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.348812Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.42179226875305176
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:23",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.348953Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:24",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.349021Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:25",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.349025Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.06879214197397232
+        },
+        {
+          "event_id": "run_faa16f00-a381-4837-b682-618ae5106e2f:26",
+          "run_id": "run_faa16f00-a381-4837-b682-618ae5106e2f",
+          "timestamp": "2026-10-26T08:52:47.349114Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "candidate_rejected",
+      "planning_mode": "agent",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "outside_candidate_removed": true
+      },
+      "summary": {
+        "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+        "final_status": "completed",
+        "total_duration_ms": 6.736165843904018,
+        "model_calls": 4,
+        "tool_calls": 1,
+        "executed_tool_calls": 1,
+        "cache_hits": 0,
+        "memory_retrievals": 0,
+        "validation_passes": 2,
+        "validation_failures": 1,
+        "replan_rounds": 1,
+        "warning_count": 1,
+        "error_count": 0,
+        "stop_reason": "sufficient_evidence"
+      },
+      "trace": [
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:1",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.349481Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:2",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.349485Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:3",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.349489Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.0016656704246997833
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:4",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351139Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:5",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351546Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.4013329744338989
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:6",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351558Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.41520874947309494
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:7",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351710Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:8",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351760Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:9",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351941Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.17675012350082397,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:10",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.351982Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.2693338319659233
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:11",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.352095Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:12",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.352483Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.38299988955259323
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:13",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.352491Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.39304187521338463
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:14",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.352640Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:15",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.353953Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.303959172219038
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:16",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.353960Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3172081671655178
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:17",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.354073Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:18",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.354399Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.3200001083314419,
+          "validation_issue_count": 3,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "candidate_outside",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "candidate_outside",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i3",
+              "type": "candidate_outside",
+              "severity": "hard"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:19",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.354406Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.3293328918516636
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:20",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.354559Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:21",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.354563Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:22",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.355418Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.8502495475113392
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:23",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.355421Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.854958314448595,
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:24",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.355425Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.8631669916212559
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:25",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.355525Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:26",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.355903Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.37287501618266106,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:27",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.355912Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.3827502951025963
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:28",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.356051Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:29",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.356122Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:30",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.356126Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.07245782762765884
+        },
+        {
+          "event_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8:31",
+          "run_id": "run_1a22e0b9-8ebe-44c3-bc7b-c0b04c2382d8",
+          "timestamp": "2026-10-26T08:52:47.356216Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "sufficient_evidence"
+        }
+      ]
+    },
+    {
+      "case": "memory_repair",
+      "planning_mode": "memory",
+      "passed": true,
+      "assertions": {
+        "tool_budget": true,
+        "model_round_budget": true,
+        "replan_budget": true,
+        "duplicate_cache_and_stop": true,
+        "hard_triggers_replan": true,
+        "memory_in_graph": true
+      },
+      "summary": {
+        "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+        "final_status": "completed",
+        "total_duration_ms": 8.501000236719847,
+        "model_calls": 5,
+        "tool_calls": 3,
+        "executed_tool_calls": 1,
+        "cache_hits": 2,
+        "memory_retrievals": 1,
+        "validation_passes": 2,
+        "validation_failures": 1,
+        "replan_rounds": 1,
+        "warning_count": 2,
+        "error_count": 0,
+        "stop_reason": "repeated_tool_calls"
+      },
+      "trace": [
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:1",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.357674Z",
+          "event_type": "RUN_STARTED",
+          "status": "running"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:2",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.357678Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "resolve_city"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:3",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.357682Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "resolve_city",
+          "duration_ms": 0.001416075974702835
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:4",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.359387Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "retrieve_memory"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:5",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.359554Z",
+          "event_type": "MEMORY_RETRIEVED",
+          "graph_node": "retrieve_memory",
+          "duration_ms": 0.1621250994503498,
+          "result_count": 1,
+          "memory_ids": [
+            "memory_e4fc7951-2f68-4b22-add3-7200751ba36f"
+          ],
+          "retrieval_scores": {
+            "memory_e4fc7951-2f68-4b22-add3-7200751ba36f": 0.869999999980787
+          }
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:6",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.359561Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "retrieve_memory",
+          "duration_ms": 0.17062528058886528
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:7",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.359663Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:8",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360081Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3308332525193691
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:9",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360092Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.34412508830428123
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:10",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360242Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:11",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360298Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:12",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360487Z",
+          "event_type": "TOOL_COMPLETED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.18541701138019562,
+          "result_count": 2,
+          "cache_hit": false
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:13",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360529Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.28458423912525177
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:14",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.360651Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:15",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361041Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.3859582357108593
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:16",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361051Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.39733294397592545
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:17",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361178Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:18",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361317Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:19",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361381Z",
+          "event_type": "TOOL_CACHE_HIT",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.060542020946741104,
+          "result_count": 2,
+          "cache_hit": true
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:20",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361421Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.24062488228082657
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:21",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361538Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:22",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361895Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "agent",
+          "duration_ms": 0.35295821726322174
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:23",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.361905Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.36420905962586403
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:24",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362074Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "tools"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:25",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362196Z",
+          "event_type": "TOOL_REQUESTED",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "status": "requested"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:26",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362251Z",
+          "event_type": "TOOL_CACHE_HIT",
+          "graph_node": "tools",
+          "tool_name": "search_places",
+          "sanitized_args": {
+            "keyword_length": 3,
+            "limit": 2
+          },
+          "duration_ms": 0.05141738802194595,
+          "result_count": 2,
+          "cache_hit": true
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:27",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362284Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "tools",
+          "duration_ms": 0.20674988627433777
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:28",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362387Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "agent"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:29",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362390Z",
+          "event_type": "DUPLICATE_CALL_BLOCKED",
+          "graph_node": "agent",
+          "status": "blocked",
+          "stop_reason": "repeated_tool_calls"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:30",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362393Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "agent",
+          "duration_ms": 0.004082918167114258
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:31",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.362537Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "finalize_draft"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:32",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.363860Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3134172186255455
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:33",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.363867Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "finalize_draft",
+          "duration_ms": 1.3269167393445969
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:34",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.363973Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:35",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.364360Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "invalid",
+          "duration_ms": 0.38175005465745926,
+          "validation_issue_count": 2,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "trip_id",
+              "severity": "hard"
+            },
+            {
+              "issue_id": "i2",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 0
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:36",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.364367Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.39058318361639977
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:37",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.364519Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "replan"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:38",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.364523Z",
+          "event_type": "REPLAN_STARTED",
+          "graph_node": "replan",
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:39",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.365386Z",
+          "event_type": "MODEL_CALLED",
+          "graph_node": "replan",
+          "duration_ms": 0.8594170212745667
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:40",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.365389Z",
+          "event_type": "REPLAN_COMPLETED",
+          "graph_node": "replan",
+          "duration_ms": 0.8634589612483978,
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:41",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.365393Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "replan",
+          "duration_ms": 0.8713328279554844
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:42",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.365492Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "validate"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:43",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.365871Z",
+          "event_type": "VALIDATION_COMPLETED",
+          "graph_node": "validate",
+          "status": "valid",
+          "duration_ms": 0.37412485107779503,
+          "validation_issue_count": 1,
+          "validation_issues": [
+            {
+              "issue_id": "i1",
+              "type": "place_repetition",
+              "severity": "soft"
+            }
+          ],
+          "replan_round": 1
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:44",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.365877Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "validate",
+          "duration_ms": 0.3817090764641762
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:45",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.366019Z",
+          "event_type": "NODE_ENTERED",
+          "graph_node": "complete"
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:46",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.366085Z",
+          "event_type": "FINALIZED",
+          "graph_node": "complete",
+          "status": "valid",
+          "validation_issue_count": 0
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:47",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.366088Z",
+          "event_type": "NODE_EXITED",
+          "graph_node": "complete",
+          "duration_ms": 0.06579188629984856
+        },
+        {
+          "event_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4:48",
+          "run_id": "run_7cbe7c19-43f8-4336-b4bd-2db4aad0bdf4",
+          "timestamp": "2026-10-26T08:52:47.366174Z",
+          "event_type": "RUN_COMPLETED",
+          "status": "completed",
+          "stop_reason": "repeated_tool_calls"
+        }
+      ]
+    }
+  ]
+}

@@ -24,7 +24,9 @@ from life_journey.application.interview_runner import run_interview_turn
 from life_journey.llm.base import InterviewLLMClient, LLMClientError, LLMConfigurationError
 from life_journey.application.planning import run_planning
 from life_journey.llm.planning import PlanningLLMClient
+from life_journey.llm.agent import AgentLLMClient
 from life_journey.schemas.planning import PlanningResponse
+from life_journey.harness.policy import HarnessConfigurationError
 from life_journey.tools import AmapPlaceTools, PlaceTools, ToolError, ToolConfigurationError, UnsupportedDestinationError, NoPlacesError
 from life_journey.application.planning_observation import collect_planning_observation
 from life_journey.schemas.interview_api import InterviewMessage, InterviewResponse
@@ -41,12 +43,13 @@ async def parse_input(request: Request, schema):
         raise HTTPException(422, detail=errors) from None
 
 
-def create_app(database_path: str | Path | None = None, *, llm_client: InterviewLLMClient | None = None, planning_client: PlanningLLMClient | None = None, place_tools: PlaceTools | None = None, planning_mode: str | None = None) -> FastAPI:
+def create_app(database_path: str | Path | None = None, *, llm_client: InterviewLLMClient | None = None, planning_client: PlanningLLMClient | None = None, place_tools: PlaceTools | None = None, planning_mode: str | None = None, agent_client: AgentLLMClient | None = None, embedding_provider=None, validation_enabled: bool | None = None, harness_policy=None, harness_hooks=()) -> FastAPI:
     """允许测试注入临时数据库；默认本地文件不依赖运行目录。"""
     environment.load_project_env()
     mode = planning_mode or os.environ.get("LIFE_JOURNEY_PLANNING_MODE", "v0")
-    if mode not in {"v0", "amap"}:
-        raise ValueError("LIFE_JOURNEY_PLANNING_MODE 仅允许 v0 或 amap")
+    if mode not in {"v0", "amap", "agent", "memory"}:
+        raise ValueError("LIFE_JOURNEY_PLANNING_MODE 仅允许 v0、amap、agent 或 memory")
+    validated = validation_enabled if validation_enabled is not None else os.environ.get('LIFE_JOURNEY_VALIDATION','0')=='1'
     path = Path(database_path or os.environ.get("LIFE_JOURNEY_DB", "") or
                 Path(__file__).resolve().parents[2] / ".local" / "life_journey.sqlite3").expanduser().resolve()
 
@@ -254,6 +257,38 @@ def create_app(database_path: str | Path | None = None, *, llm_client: Interview
             save_interview(db, result.updated_context.trip, result.updated_state)
         return response
 
+    @app.post('/api/trips/{trip_id}/feedback')
+    async def post_feedback(trip_id: str, request: Request):
+        """只写通过过滤的长期偏好，原始反馈和rating不作为记忆整段存储。"""
+        from life_journey.schemas.memory import FeedbackInput
+        from life_journey.application.memory import MemoryStore, extract_candidates
+        from life_journey.llm.embedding import CompatibleEmbeddingProvider
+        data=await parse_input(request,FeedbackInput)
+        with connect(path) as db:
+            context,_=load_interview(db,trip_id)
+            profile=read_profile(db)
+        person_id=data.person_id or (profile.person_id if profile else context.trip.participant_ids[0] if len(context.trip.participant_ids)==1 else None)
+        if person_id not in context.trip.participant_ids:raise HTTPException(422,'请明确选择本次参与者作为反馈主体')
+        if data.memory_type=='relationship':
+            rel=next((r for r in context.relationships if r.relationship_id==data.relationship_id),None)
+            if rel is None or {rel.person_a_id,rel.person_b_id}!=set(context.trip.participant_ids):raise HTTPException(422,'关系反馈需要与本次参与者完全匹配的关系')
+        candidates=extract_candidates(data.feedback,context,person_id,memory_type=data.memory_type,relationship_id=data.relationship_id,source_reference='feedback:'+trip_id)
+        confirmed=[]
+        if data.confirm_memory_ids:
+            try:confirmed=MemoryStore(path,embedding_provider).confirm(data.confirm_memory_ids,context)
+            except ValueError:raise HTTPException(422,'记忆不存在或不在本次范围') from None
+        if not candidates:return {'stored_memory_ids':[],'confirmed_memory_ids':confirmed,'rejected_as_temporary_or_unsupported':not confirmed}
+        owned=None
+        try:
+            provider=embedding_provider
+            if provider is None:owned=CompatibleEmbeddingProvider();provider=owned
+            stored=MemoryStore(path,provider).write(candidates)
+        except LLMConfigurationError as exc:raise HTTPException(503,str(exc)) from None
+        except LLMClientError as exc:raise HTTPException(502,str(exc)) from None
+        finally:
+            if owned:owned.close()
+        return {'stored_memory_ids':[m.memory_id for m in stored],'confirmed_memory_ids':confirmed,'rejected_as_temporary_or_unsupported':False}
+
     @app.post("/api/trips/{trip_id}/planning", response_model=PlanningResponse)
     def post_planning(trip_id: str, debug: bool = False):
         """只在系统就绪后按用户明确点击规划；不自动规划，不更新确认状态。"""
@@ -263,32 +298,61 @@ def create_app(database_path: str | Path | None = None, *, llm_client: Interview
             before = interview_snapshot(db, trip_id)
         if not check_minimum_readiness(context, state):
             raise HTTPException(409, "请先完成这次旅行的访谈")
+        def fail(status,error):
+            """默认错误契约不变；debug才附本次脱敏失败诊断，不保存跨请求记录。"""
+            if debug and hasattr(error,'harness_summary'):
+                return JSONResponse(status_code=status,content={'detail':str(error),
+                    'harness_summary':error.harness_summary.model_dump(mode='json'),
+                    'harness_trace':[event.model_dump(mode='json') for event in error.harness_trace],
+                    'harness_errors':[issue.model_dump(mode='json') for issue in error.harness_context.errors]})
+            raise HTTPException(status,str(error)) from None
+
         owned_client = None
         owned_tools = None
+        owned_embedding = None
         try:
             observation = None
-            if mode == "amap":
+            if mode in {"amap", "agent", "memory"}:
                 if place_tools is None:
                     owned_tools = AmapPlaceTools()
-                observation = collect_planning_observation(context, place_tools or owned_tools)
-            if planning_client is None:
+                if mode == "amap":
+                    observation = collect_planning_observation(context, place_tools or owned_tools)
+            if planning_client is None or (mode in {"agent","memory"} and agent_client is None):
                 from life_journey.llm.deepseek import DeepSeekInterviewClient, DeepSeekConfig
                 config = DeepSeekConfig.from_env()
                 owned_client = DeepSeekInterviewClient(DeepSeekConfig(model=config.model, max_output_tokens=8192, timeout_seconds=120))
-            result = run_planning(context, state, planning_client or owned_client, observation)
+            if mode in {"agent","memory"}:
+                from life_journey.application.agent_planning import run_agent_planning
+                memory_store=None
+                if mode=='memory':
+                    from life_journey.application.memory import MemoryStore
+                    from life_journey.llm.embedding import CompatibleEmbeddingProvider
+                    provider=embedding_provider
+                    if provider is None:owned_embedding=CompatibleEmbeddingProvider();provider=owned_embedding
+                    memory_store=MemoryStore(path,provider)
+                from life_journey.harness.runtime import AgentHarness
+                runtime=AgentHarness(context.trip.trip_id,mode,policy=harness_policy,hooks=harness_hooks)
+                result = run_agent_planning(context, state, agent_client or owned_client,
+                                            planning_client or owned_client, place_tools or owned_tools, validated=validated or mode=="memory", memory_store=memory_store,harness=runtime)
+            else:
+                result = run_planning(context, state, planning_client or owned_client, observation)
+        except HarnessConfigurationError as exc:
+            return fail(503,exc)
         except ToolConfigurationError as exc:
-            raise HTTPException(503, str(exc)) from None
+            return fail(503,exc)
         except (UnsupportedDestinationError, NoPlacesError) as exc:
-            raise HTTPException(422, str(exc)) from None
+            return fail(422,exc)
         except ToolError as exc:
-            raise HTTPException(502, str(exc)) from None
+            return fail(502,exc)
         except LLMConfigurationError as exc:
-            raise HTTPException(503, str(exc)) from None
+            return fail(503,exc)
         except LLMClientError as exc:
-            raise HTTPException(502, str(exc)) from None
+            return fail(502,exc)
         except (ValueError, TypeError):
             raise HTTPException(502, "规划输出未通过校验，请稍后重试") from None
         finally:
+            if owned_embedding is not None:
+                owned_embedding.close()
             if owned_tools is not None:
                 owned_tools.close()
             if owned_client is not None:
@@ -298,6 +362,8 @@ def create_app(database_path: str | Path | None = None, *, llm_client: Interview
                 raise HTTPException(409, "访谈状态已变化，请按最新状态重新规划")
         if not debug:
             result.metrics = None
+        if result.validation_result is None:
+            return JSONResponse(content=result.model_dump(mode="json", exclude={"validation_result","unresolved_constraints","final_status","replan_round","memory_provenance"}))
         return result
 
     return app

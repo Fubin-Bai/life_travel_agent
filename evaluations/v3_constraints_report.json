@@ -1,0 +1,120 @@
+{
+  "kind": "offline_scripted_rule_evaluation",
+  "case_count": 12,
+  "violation_rate_before": 0.6666666666666666,
+  "violation_rate_after": 0.08333333333333333,
+  "replan_success_rate": 0.875,
+  "hard_constraint_resolution_rate": 0.9444444444444444,
+  "unsupported_factual_claim_rate_before": 0.25,
+  "unsupported_factual_claim_rate_after": 0.0,
+  "cases": [
+    {
+      "case": "closed_poi",
+      "expected_detected": true,
+      "before_hard": 3,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "required_missing",
+      "expected_detected": true,
+      "before_hard": 1,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "excluded_activity",
+      "expected_detected": true,
+      "before_hard": 3,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "candidate_hallucination",
+      "expected_detected": true,
+      "before_hard": 3,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 3,
+      "after_unsupported": 0
+    },
+    {
+      "case": "route_mode_hallucination",
+      "expected_detected": true,
+      "before_hard": 3,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 3,
+      "after_unsupported": 0
+    },
+    {
+      "case": "no_route_misuse",
+      "expected_detected": true,
+      "before_hard": 3,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 3,
+      "after_unsupported": 0
+    },
+    {
+      "case": "fast_too_sparse",
+      "expected_detected": true,
+      "before_hard": 0,
+      "after_hard": 0,
+      "rounds": 0,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "slow_too_dense",
+      "expected_detected": true,
+      "before_hard": 0,
+      "after_hard": 0,
+      "rounds": 0,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "duplicate_restaurant",
+      "expected_detected": true,
+      "before_hard": 0,
+      "after_hard": 0,
+      "rounds": 0,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "excessive_backtracking",
+      "expected_detected": true,
+      "before_hard": 0,
+      "after_hard": 0,
+      "rounds": 0,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "successful_local_repair",
+      "expected_detected": true,
+      "before_hard": 1,
+      "after_hard": 0,
+      "rounds": 1,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    },
+    {
+      "case": "unresolved_after_limit",
+      "expected_detected": true,
+      "before_hard": 1,
+      "after_hard": 1,
+      "rounds": 2,
+      "before_unsupported": 0,
+      "after_unsupported": 0
+    }
+  ]
+}

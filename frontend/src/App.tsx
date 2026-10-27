@@ -272,6 +272,31 @@ function PersonFields({
   );
 }
 
+function TripFeedback({ tripId, personId }: { tripId: string; personId: string }) {
+  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
+  const [saving, setSaving] = useState(false);
+  return <form onSubmit={async (event) => {
+    event.preventDefault();
+    if (saving || !text.trim()) return;
+    setSaving(true); setMessage("");
+    try {
+      const result = await api<{ stored_memory_ids: string[] }>(
+        `/trips/${encodeURIComponent(tripId)}/feedback`, "POST",
+        { feedback: text, ...(personId ? { person_id: personId } : {}) });
+      setMessage(result.stored_memory_ids.length ? "已保存明确的长期偏好。" : "反馈已处理；临时或不明确的信息未写入长期偏好。");
+      setText("");
+    } catch (error) { setMessage(error instanceof Error ? error.message : "反馈保存失败。"); }
+    finally { setSaving(false); }
+  }}>
+    <label htmlFor="trip-feedback">旅行反馈</label>
+    <textarea id="trip-feedback" maxLength={3000} value={text} onChange={(event) => setText(event.target.value)}
+      placeholder="例如：我一直喜欢安静的咖啡馆，以后也希望保留。" disabled={saving} />
+    <button type="submit" disabled={saving || !text.trim()}>{saving ? "正在保存…" : "提交反馈"}</button>
+    {message && <p role="status">{message}</p>}
+  </form>;
+}
+
 export default function App() {
   const [page, setPage] = useState<Page>("interview");
   const [persons, setPersons] = useState<Person[]>([]);
@@ -677,8 +702,13 @@ export default function App() {
                 <h2>这次旅行的安排</h2>
                 <p className="itinerary-notice">{plan.notice}</p>
                 <p className="itinerary-summary">{plan.itinerary.summary}</p>
-                {plan.itinerary.days.map((day) => (
-                  <article className="itinerary-day" key={day.date}>
+                {plan.final_status === "unresolved" && <div role="alert">
+                  <p>以下为未完成校验的草稿，请先处理未解决约束：</p>
+                  <ul>{plan.unresolved_constraints?.map((issue) => <li key={issue.issue_id}>{issue.message}</li>)}</ul>
+                </div>}
+                {!!plan.memory_provenance?.length && <p>本次参考了 {plan.memory_provenance.length} 条历史偏好；本次明确需求优先。</p>}
+                {plan.itinerary.days.map((day, dayIndex) => (
+                  <article className="itinerary-day" key={`${day.date}-${dayIndex}`}>
                     <header>
                       <span>{day.date}</span>
                       <h3>{day.theme}</h3>
@@ -705,6 +735,7 @@ export default function App() {
                     ))}
                   </article>
                 ))}
+                <TripFeedback key={activeTripId} tripId={activeTripId} personId={profileId} />
               </section>
             )}
             <form
